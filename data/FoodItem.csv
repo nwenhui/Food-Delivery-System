@@ -1,0 +1,201 @@
+Fid,Rid,name,originalPrice,categories,dailyLimit,availabilityStatus
+1,1,Ruscus-leaf Bamboo,40.17 ,Seafood,90,90
+2,14,Pricklyburr,18.01 ,Meat,61,61
+3,14,Fig,36.16 ,Vegetarian,87,87
+4,4,Puerto Rico Sensitive Pea,32.69 ,Japanese,93,93
+5,2,Scouringrush Horsetail,7.62 ,Western,87,87
+6,6,Rimrock Milkvetch,11.34 ,Mexican,96,96
+7,3,Brittlestem,20.99 ,Chinese,88,88
+8,14,Tassel Grape Hyacinth,20.81 ,Dessert,53,53
+9,20,Wooton's Threeawn,38.02 ,Korean,76,76
+10,20,Beard Lichen,19.37 ,Thai,63,63
+11,4,Oldfashioned Weigela,12.39 ,Seafood,77,77
+12,15,Rufous Bulrush,24.62 ,Meat,80,80
+13,3,Mt. Tamalpais Jewelflower,12.26 ,Vegetarian,72,72
+14,19,Snailflower,22.56 ,Japanese,90,90
+15,6,Corn Poppy,7.51 ,Western,87,87
+16,11,Slender Bird's-foot Trefoil,29.23 ,Mexican,77,77
+17,4,Harsh Cyanea,15.72 ,Chinese,59,59
+18,11,Deane's Wattle,49.25 ,Dessert,68,68
+19,11,Cutleaf Indian Paintbrush,36.65 ,Korean,52,52
+20,16,Licorice,49.34 ,Thai,69,69
+21,13,Common Sheep Sorrel,30.03 ,Seafood,96,96
+22,9,Appalachian Barren Strawberry,46.93 ,Meat,95,95
+23,20,Hairtip Clubmoss,35.70 ,Vegetarian,89,89
+24,2,California Dutchman's Pipe,45.44 ,Japanese,73,73
+25,4,Eastern Poison Ivy,32.43 ,Western,91,91
+26,13,Darkstar Milkvine,6.32 ,Mexican,85,85
+27,14,Little Cottonrose,44.32 ,Chinese,58,58
+28,9,Goldentop,13.07 ,Dessert,66,66
+29,19,Arizona Coraldrops,15.93 ,Korean,90,90
+30,10,Texas Desert-thorn,40.17 ,Thai,87,87
+31,8,Parry's Wirelettuce,17.44 ,Seafood,72,72
+32,15,New Mexico Xanthoparmelia Lichen,42.95 ,Meat,78,78
+33,9,Common Hop,46.14 ,Vegetarian,76,76
+34,5,Mountain Rockcress,39.29 ,Japanese,92,92
+35,9,Thread Rush,35.47 ,Western,79,79
+36,12,Thornber's Nipple Cactus,30.81 ,Mexican,69,69
+37,6,Desert Trumpet,26.28 ,Chinese,90,90
+38,13,Canadian Rush,35.27 ,Dessert,84,84
+39,3,Maemon Valley Maiden Fern,36.00 ,Korean,87,87
+40,13,Kopiko Kea,31.63 ,Thai,86,86
+41,14,Blueberry,10.18 ,Seafood,53,53
+42,13,Zonal Geranium,22.47 ,Meat,71,71
+43,9,Carolina Puccoon,14.69 ,Vegetarian,79,79
+44,1,Hairy Clustervine,30.99 ,Japanese,89,89
+45,18,Trichostomum Moss,11.83 ,Western,83,83
+46,12,Brazilwood,37.54 ,Mexican,74,74
+47,10,Fuscidea Lichen,49.71 ,Chinese,67,67
+48,18,Intermediate Cup Lichen,46.50 ,Dessert,93,93
+49,16,Summergrass,24.15 ,Korean,65,65
+50,2,Waianae Range Nehe,7.11 ,Thai,68,68
+51,12,Igniar's Dotted Lichen,11.70 ,Seafood,58,58
+52,15,Dubautia,25.14 ,Meat,52,52
+53,6,Winter Grapefern,48.57 ,Vegetarian,74,74
+54,5,Scribble Lichen,24.79 ,Japanese,58,58
+55,11,Burrobush,36.08 ,Western,50,50
+56,17,Lecidea Lichen,43.10 ,Mexican,85,85
+57,16,Fairypoppy,29.83 ,Chinese,76,76
+58,8,Woodrush Sedge,38.93 ,Dessert,65,65
+59,3,Least Navarretia,27.43 ,Korean,100,100
+60,4,Velvety Goldenrod,25.37 ,Thai,80,80
+61,18,Ant Tree,29.81 ,Seafood,86,86
+62,9,Charming Centaury,38.45 ,Meat,100,100
+63,3,Del Norte Manzanita,8.58 ,Vegetarian,100,100
+64,4,Elegant Indian Paintbrush,6.20 ,Japanese,74,74
+65,16,Wild Dilly,23.44 ,Western,93,93
+66,4,Goatnut,32.94 ,Mexican,65,65
+67,7,Pineland Skullcap,43.81 ,Chinese,100,100
+68,19,Longspur Lupine,10.19 ,Dessert,79,79
+69,3,Southern California Draba,20.05 ,Korean,70,70
+70,3,Lady's Tresses,44.11 ,Thai,65,65
+71,11,Swamp Peperomia,21.39 ,Seafood,81,81
+72,14,Dwarf Rose,31.50 ,Meat,66,66
+73,15,Lapland Beard Lichen,44.30 ,Vegetarian,96,96
+74,12,Wright's Nipple Cactus,17.70 ,Japanese,60,60
+75,13,Trailing Abutilon,41.52 ,Western,76,76
+76,15,Nodding Buckwheat,8.47 ,Mexican,98,98
+77,15,Lluvia De Orquideas,37.34 ,Chinese,82,82
+78,5,Miriquidica Lichen,46.46 ,Dessert,69,69
+79,13,Intermountain Phacelia,47.28 ,Korean,93,93
+80,18,Northern Long Sedge,30.43 ,Thai,97,97
+81,14,Eastwood's Buttercup,43.97 ,Seafood,67,67
+82,17,New York Aster,31.43 ,Meat,67,67
+83,16,Twoflower Dwarfdandelion,9.20 ,Vegetarian,99,99
+84,4,Confusing Lady's Tresses,35.23 ,Japanese,51,51
+85,13,Lavender Bladderwort,28.43 ,Western,92,92
+86,11,Grassleaf Yellow Loosestrife,20.41 ,Mexican,60,60
+87,2,Pricklyleaf Dogweed,25.87 ,Chinese,64,64
+88,1,Pachyrhizus,30.82 ,Dessert,67,67
+89,13,Xanthoparmelia Lichen,21.57 ,Korean,82,82
+90,4,Common Ragwort,16.07 ,Thai,64,64
+91,16,Grassland Sedge,9.07 ,Seafood,56,56
+92,3,Rim Lichen,14.84 ,Meat,73,73
+93,11,Origanum,45.95 ,Vegetarian,57,57
+94,18,Flatspike Sedge,23.58 ,Japanese,54,54
+95,20,Buckwheat,18.42 ,Western,85,85
+96,14,Graptophyllum,24.59 ,Mexican,94,94
+97,1,Fernald's Milkvetch,35.35 ,Chinese,78,78
+98,5,Guinea Yam,8.38 ,Dessert,66,66
+99,8,Whitetop,31.48 ,Korean,82,82
+100,11,Clover Ash,28.08 ,Thai,58,58
+101,3,Lempholemma Lichen,49.35 ,Seafood,97,97
+102,7,Idaho Esslingeriana Lichen,9.75 ,Meat,64,64
+103,1,Hybrid Elm,12.82 ,Vegetarian,94,94
+104,12,Allegheny Onion,38.62 ,Japanese,71,71
+105,11,Stolon Stonecrop,22.69 ,Western,61,61
+106,15,Crinkleawn Grass,18.04 ,Mexican,87,87
+107,7,Stiff Bluestar,41.02 ,Chinese,79,79
+108,6,Smallflower Nemophila,14.61 ,Dessert,95,95
+109,19,Kaibab Pincushion Cactus,14.26 ,Korean,87,87
+110,14,Slimleaf Prairie Clover,22.78 ,Thai,58,58
+111,2,Rim Lichen,28.95 ,Seafood,91,91
+112,12,Woollyheads,48.21 ,Meat,68,68
+113,19,Arctoparmelia Lichen,40.86 ,Vegetarian,81,81
+114,16,Parsley,38.53 ,Japanese,63,63
+115,4,Dotted Melaleuca,38.31 ,Western,91,91
+116,2,Rim Lichen,28.02 ,Mexican,83,83
+117,3,Rocky Mountain Douglas-fir,13.30 ,Chinese,82,82
+118,4,Streambank Lipfern,10.24 ,Dessert,53,53
+119,8,Psychotria,8.30 ,Korean,65,65
+120,9,'ohe Mauka,44.77 ,Thai,93,93
+121,9,Fewseeded Bog Sedge,9.50 ,Seafood,98,98
+122,19,Crescent Milkvetch,14.32 ,Meat,97,97
+123,18,California Buckthorn,40.75 ,Vegetarian,87,87
+124,6,White Meadowfoam,19.44 ,Japanese,70,70
+125,9,Arizona Lupine,24.65 ,Western,65,65
+126,13,Creeping Woodsorrel,24.28 ,Mexican,57,57
+127,15,Spirea,27.53 ,Chinese,67,67
+128,16,Hybrid Blazing Star,37.35 ,Dessert,78,78
+129,14,Nightshade,5.37 ,Korean,60,60
+130,3,Keahi,18.62 ,Thai,57,57
+131,6,Bluntleaf Hayscented Fern,29.35 ,Seafood,66,66
+132,17,Sargent's Barberry,17.14 ,Meat,100,100
+133,13,Southern Arrowwood,35.60 ,Vegetarian,91,91
+134,1,Western False Asphodel,48.17 ,Japanese,50,50
+135,11,Hybrid Oak,19.47 ,Western,100,100
+136,15,Purple Rushlily,37.69 ,Mexican,68,68
+137,3,Swampmahogany,35.77 ,Chinese,79,79
+138,17,Doum Palm,19.83 ,Dessert,57,57
+139,15,Cleveland's Cryptantha,27.97 ,Korean,56,56
+140,17,Littlebrownjug,26.58 ,Thai,62,62
+141,9,Swiss Kidney Lichen,17.49 ,Seafood,62,62
+142,11,Mojave Thistle,28.83 ,Meat,63,63
+143,4,Johnny-jump-up,37.66 ,Vegetarian,57,57
+144,20,Crinkled Onion,18.19 ,Japanese,53,53
+145,17,Peltate Rimmed Navel Lichen,5.54 ,Western,74,74
+146,4,Fisher's Tundragrass,46.19 ,Mexican,57,57
+147,6,Spreading Groundsmoke,48.91 ,Chinese,73,73
+148,19,Ashgray Indian Paintbrush,23.65 ,Dessert,95,95
+149,15,Papershell Pinyon,43.83 ,Korean,66,66
+150,7,Creeping Liriope,28.16 ,Thai,81,81
+151,14,Beautiful Spikerush,10.86 ,Seafood,98,98
+152,20,Wreath Lichen,10.24 ,Meat,65,65
+153,9,Blistered Naval Lichen,17.17 ,Vegetarian,57,57
+154,3,Pitted Beardgrass,45.65 ,Japanese,76,76
+155,4,Marlin Beaksedge,38.45 ,Western,76,76
+156,1,Kachina Fleabane,32.02 ,Mexican,85,85
+157,17,Mustang Clover,46.85 ,Chinese,84,84
+158,10,Sticky Wattle,8.63 ,Dessert,94,94
+159,11,Woods' Rose,14.87 ,Korean,55,55
+160,6,Haitian Catalpa,10.80 ,Thai,70,70
+161,16,Mauna Kea Phyllostegia,33.84 ,Seafood,85,85
+162,17,New York Hawthorn,40.39 ,Meat,95,95
+163,5,Chilean Wormseed,5.40 ,Vegetarian,88,88
+164,7,Spring Club Lichen,5.84 ,Japanese,87,87
+165,19,Cornflag,27.11 ,Western,70,70
+166,16,Yellow Rattle,45.83 ,Mexican,76,76
+167,16,Woollyfruit Sedge,49.44 ,Chinese,90,90
+168,1,Silky Morning-glory,25.51 ,Dessert,67,67
+169,12,Common Deerweed,5.49 ,Korean,75,75
+170,8,Crenate Fishscale Lichen,30.02 ,Thai,99,99
+171,11,Fernald's Bluegrass,31.89 ,Seafood,65,65
+172,1,Lavin's Milkvetch,25.60 ,Meat,58,58
+173,19,Wild Sugar Apple,29.25 ,Vegetarian,58,58
+174,1,Mountain Bush Honeysuckle,41.07 ,Japanese,81,81
+175,11,Cutleaf Watermilfoil,24.00 ,Western,93,93
+176,9,Mountain Rosette Lichen,46.28 ,Mexican,75,75
+177,3,Motherwort,11.27 ,Chinese,71,71
+178,2,Wand Blazing Star,30.89 ,Dessert,97,97
+179,14,Lichinella Lichen,30.48 ,Korean,76,76
+180,12,Eggyolk Lichen,47.50 ,Thai,68,68
+181,14,Torrey Wolfberry,10.34 ,Seafood,97,97
+182,12,Shortstem Beardtongue,10.50 ,Meat,59,59
+183,17,Georgia Beargrass,43.70 ,Vegetarian,77,77
+184,5,Montpelier Cistus,6.37 ,Japanese,54,54
+185,17,Field Cottonrose,10.69 ,Western,55,55
+186,10,Cream Stonecrop,37.17 ,Mexican,95,95
+187,17,Phloxleaf Bedstraw,39.01 ,Chinese,95,95
+188,12,Slender Spikerush,38.20 ,Dessert,54,54
+189,16,Red Bulrush,8.12 ,Korean,52,52
+190,2,Tundra Aster,43.97 ,Thai,74,74
+191,6,Big Tripogon,35.35 ,Seafood,52,52
+192,19,Angerman's Sphagnum,33.10 ,Meat,91,91
+193,16,Early Forsythia,31.28 ,Vegetarian,77,77
+194,17,Mexican Ash,47.30 ,Japanese,95,95
+195,20,Redclay Hawthorn,37.92 ,Western,52,52
+196,14,Showy Orchid,19.32 ,Mexican,82,82
+197,14,Rough Barnyardgrass,32.85 ,Chinese,53,53
+198,9,Cutgrass,43.55 ,Dessert,66,66
+199,8,Lophiola,22.25 ,Korean,95,95
+200,11,Munz's Onion,17.92 ,Thai,85,85
