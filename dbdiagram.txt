@@ -1,0 +1,134 @@
+Table FDSManager {
+  manager_id INTEGER PK
+	accessRight INTEGER // NOT NULL
+}
+
+TABLE Customers {
+ Cid INTEGER PK
+	name VARCHAR // NOT NULL
+	numOrders INTEGER
+	rewardPoints INTEGER
+	currentAddress VARCHAR // NOT NULL
+	lastOrderTime DATETIME
+	createdDate DATE // NOT NULL
+	creditCardNumber VARCHAR
+	accessRight INTEGER // NOT NULL
+}
+
+TABLE Restaurants {
+	Rid INTEGER PK
+	name VARCHAR(50) // NOT NULL
+	minAmount DECIMAL
+	address VARCHAR(100) // NOT NULL
+}
+
+TABLE Staffs {
+ Sid INTEGER PK
+ Rid INTEGER // NOT NULL
+	name VARCHAR(50) // NOT NULL
+	hireDate DATE // NOT NULL
+	terminationDate DATE
+	accessRight INTEGER // NOT NULL
+}
+
+Ref: Staffs.Sid > Restaurants.Rid
+
+TABLE FoodItem {
+	Fid INTEGER PK
+	Rid INTEGER // NOT NULL
+	name VARCHAR(50) // NOT NULL
+	originalPrice DECIMAL // NOT NULL
+	categories VARCHAR(10) // NOT NULL
+	dailyLimit INTEGER // NOT NULL
+	availabilityStatus INTEGER // to reset to dailyLimit daily
+}
+
+Ref: FoodItem.Fid > Restaurants.Rid
+
+
+TABLE DeliveryRiders {
+	Did INTEGER PK
+	name VARCHAR(50)
+	startDate DATE
+	terminationDate DATE
+	baseSalary DECIMAL //Null delivery fee to be added based on the number of deliveries made in that month
+	employmentType INTEGER // Not null 1: fullTime, 2: partTime
+	accessRight INTEGER //NOT NULL shifts?
+}
+
+TABLE Orders {
+	Oid INTEGER PK
+	Did INTEGER //NOT NULL 
+	Cid INTEGER// NOT NULL,
+	cost DECIMAL// NOT NULL
+	location VARCHAR(100) // NOT NULL,
+	orderTime TIMESTAMP// NOT NULL,
+	deliveryCost DECIMAL// NOT NULL,
+}
+
+Ref: Orders.Did - DeliveryRiders.Did
+Ref: Orders.Cid - Customers.Cid	
+	
+	
+TABLE OrderedItem {
+	IOid INTEGER PK
+	Oid INTEGER
+	price DECIMAL// NOT NULL,
+	quantity INTEGER// NOT NULL,
+}
+
+Ref: OrderedItem.Oid - Orders.Oid
+
+TABLE Payment {
+	Oid INTEGER PK
+	Cid INTEGER// NOT NULL,
+	cash BOOLEAN //NOT NULL,
+}
+
+Ref: Payment.Oid - Orders.Oid
+Ref: Payment.Cid - Customers.Cid
+
+TABLE Promotion {
+	promo_id INTEGER PK
+	Cid INTEGER
+	Fid INTEGER
+	promotionType INTEGER // 1: SpecialCoupon, 2: FreeDelivery, 3: PromotionalPrice
+	promotionalCode VARCHAR(20) // NOT NULL,
+	startTime TIMESTAMP// NOT NULL,
+	endTime TIMESTAMP// NOT NULL,
+}
+
+Ref: Promotion.Cid - Customers.Cid // For SpeicalCoupon
+Ref: Promotion.Fid - FoodItem.Fid // For Promotion
+
+TABLE Locations {
+	Lid INTEGER PK
+	Cid NTEGER
+	address VARCHAR(100)
+}
+
+Ref: Locations.Cid - Customers.Cid
+
+TABLE Assignment {
+	Oid INTEGER // NOT NULL,
+	Did INTEGER// NOT NULL,
+	TimeOrderPlaced TIMESTAMP
+	DepartTimeToRestaurant TIMESTAMP
+	ArrivalTimeToRestaurant TIMESTAMP
+	DepartTimeToCustomer TIMESTAMP
+	ArrivalTimeToCustomer TIMESTAMP
+}
+
+Ref: Assignment.Oid - Orders.Oid
+Ref: Assignment.Did - DeliveryRiders.Did
+
+TABLE Feedback {
+	feedback_id INTEGER PK
+	Rid INTEGER
+	Did INTEGER
+	review VARCHAR(500)
+	rating INTEGER// NOT NULL,
+}
+
+Ref: Feedback.Rid - Restaurants.Rid // reviews for restaurants
+Ref: Feedback.Did - DeliveryRiders.Did  // reviews for delivery riders
