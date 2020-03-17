@@ -1,10 +1,42 @@
 @media all and (min-width: 480px) {
-    .Login {
-      padding: 60px 0;
-    }
+	.Login {
+		padding: 60px 0;
+	}
+
+	.Login form {
+		margin: 0 auto;
+		max-width: 500px;
+	}
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;  
+}
   
-    .Login form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
-  }
+
+.form-group {
+	display: flex;
+  justify-content: space-between;
+  margin: 5px;
+	height: 30px;
+
+	label {
+		padding-top: 6px;
+		width: 100px;
+	}
+	
+	.input {
+		border-radius: 4px;
+	}
+}
+
+button {
+	margin:5px;
+}
+
+
+  
+
+  
