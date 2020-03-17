@@ -3,10 +3,9 @@ import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import {
-  NumOrdersR,
-  Salary,
-  NumHours,
-  PastDeliveries
+  NumOrders,
+  OrderList,
+  RewardPoints
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -15,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = () => {
+const DashboardCustomer = () => {
   const classes = useStyles();
 
   return (
@@ -27,30 +26,21 @@ const Dashboard = () => {
       >
         <Grid
           item
-          lg={4}
-          sm={4}
-          xl={4}
-          xs={12}
-        >
-          <NumOrdersR />
-        </Grid>
-        <Grid
-          item
-          lg={4}
+          lg={6}
           sm={6}
-          xl={4}
+          xl={6}
           xs={12}
         >
-          <NumHours />
+          <NumOrders />
         </Grid>
         <Grid
           item
-          lg={4}
-          sm={4}
-          xl={4}
+          lg={6}
+          sm={6}
+          xl={6}
           xs={12}
         >
-          <Salary />
+          <RewardPoints />
         </Grid>
         <Grid
           item
@@ -59,11 +49,11 @@ const Dashboard = () => {
           xl={12}
           xs={12}
         >
-          <PastDeliveries />
+          <OrderList />
         </Grid>
       </Grid>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardCustomer;

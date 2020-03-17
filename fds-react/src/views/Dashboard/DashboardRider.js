@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = () => {
+const DashboardRider = () => {
   const classes = useStyles();
 
   return (
@@ -66,4 +66,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardRider;
