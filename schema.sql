@@ -7,12 +7,13 @@ DROP TABLE IF EXISTS DeliveryRiders CASCADE;
 DROP TABLE IF EXISTS Orders CASCADE;
 DROP TABLE IF EXISTS OrderedItem CASCADE;
 DROP TABLE IF EXISTS Payment CASCADE;
-DROP TABLE IF EXISTS Promotion CASCADE;
+DROP TABLE IF EXISTS SpecialPromotion CASCADE;
+DROP TABLE IF EXISTS DeliveryPromotion CASCADE;
+DROP TABLE IF EXISTS PricePromotion CASCADE;
 DROP TABLE IF EXISTS Locations CASCADE;
 DROP TABLE IF EXISTS Assignment CASCADE;
 DROP TABLE IF EXISTS Feedback CASCADE;
 DROP SEQUENCE IF EXISTS ManagerSeq, CidSeq, SidSeq, DidSeq, IOidSeq, LidSeq, OidSeq, FidSeq, PromoSeq, feedbackSeq;
-
 
 --accessRight 1:FDS Manageer, 2: Restaurant Staff, 3: Delivery Riders, 4: Customers
 
@@ -20,6 +21,7 @@ CREATE SEQUENCE ManagerSeq;
 CREATE TABLE FDSManager (
 	manager_id 			INTEGER DEFAULT nextval('ManagerSeq'),
 	accessRight			INTEGER NOT NULL,
+	password			VARCHAR(100) NOT NULL,
 	PRIMARY KEY (manager_id)
 );
 ALTER SEQUENCE ManagerSeq OWNED BY FDSManager.manager_id;
@@ -33,11 +35,18 @@ CREATE TABLE Customers (
 	currentAddress		VARCHAR(100) NOT NULL,
 	lastOrderTime		TIMESTAMP,
 	createdDate			DATE NOT NULL,
-	creditCardNumber	bigint,
 	accessRight			INTEGER NOT NULL,
+	password			VARCHAR(100) NOT NULL,
 	PRIMARY KEY (Cid)
 );
 ALTER SEQUENCE CidSeq OWNED BY Customers.Cid;
+
+CREATE TABLE CreditCardList (
+	Cid					INTEGER,
+	creditCardNumber	bigint,
+	PRIMARY KEY (creditCardNumber),
+	FOREIGN KEY (Cid) REFERENCES Customers (Cid) ON DELETE CASCADE
+);
 
 CREATE SEQUENCE RidSeq;
 CREATE TABLE Restaurants (
@@ -57,6 +66,7 @@ CREATE TABLE Staffs (
 	hireDate			DATE NOT NULL,
 	terminationDate 	DATE,
 	accessRight			INTEGER NOT NULL,
+	password			VARCHAR(100) NOT NULL,
 	PRIMARY KEY (Sid),
 	FOREIGN KEY (Rid) REFERENCES Restaurants (Rid) ON DELETE CASCADE
 );
@@ -86,6 +96,7 @@ CREATE TABLE DeliveryRiders (
 	employmentType		INTEGER NOT NULL, -- 1: fullTime, 2: partTime
 	accessRight			INTEGER NOT NULL,
 	-- shifts?
+	password			VARCHAR(100) NOT NULL,
 	PRIMARY KEY (Did)
 );
 ALTER SEQUENCE DidSeq OWNED BY DeliveryRiders.Did;
@@ -109,10 +120,12 @@ CREATE SEQUENCE IOidSeq;
 CREATE TABLE OrderedItem (
 	IOid				INTEGER DEFAULT nextval('IOidSeq'),
 	Oid					INTEGER,
-	price				DECIMAL NOT NULL,
+	Fid					INTEGER,
+	originalPrice		DECIMAL NOT NULL,
 	quantity			INTEGER NOT NULL,
 	PRIMARY KEY (IOid),
-	FOREIGN KEY (Oid) REFERENCES Orders (Oid) ON DELETE CASCADE
+	FOREIGN KEY (Oid) REFERENCES Orders (Oid) ON DELETE CASCADE,
+	FOREIGN KEY (Fid, price) REFERENCES FoodItem (Fid, originalPrice)
 );
 ALTER SEQUENCE IOidSeq OWNED BY OrderedItem.IOid;
 
@@ -123,25 +136,46 @@ CREATE TABLE Payment (
 	FOREIGN KEY (Cid) REFERENCES Customers (Cid)
 );
 
-CREATE SEQUENCE PromoSeq;
-CREATE TABLE Promotion (
-	promo_id			INTEGER DEFAULT nextval('PromoSeq'),
+CREATE SEQUENCE SpecialPromoSeq;
+CREATE TABLE SpecialPromotion (
+	promo_id			INTEGER DEFAULT nextval('SpecialPromoSeq'),
 	Cid					INTEGER,
-	Fid					INTEGER,
-	promotionType		INTEGER, -- 1: SpecialCoupon, 2: FreeDelivery, 3: PromotionalPrice
-	promotionalCode		VARCHAR(20) NOT NULL,
 	startTime			TIMESTAMP NOT NULL,
 	endTime				TIMESTAMP NOT NULL,
+	discount			INTEGER NOT NULL,
 	PRIMARY KEY (promo_id),
-	FOREIGN KEY (Cid) REFERENCES Customers (Cid), -- for SpecialCoupon
-	FOREIGN KEY (Fid) REFERENCES FoodItem (Fid) -- for PromotionalPrice
+	FOREIGN KEY (Cid) REFERENCES Customers (Cid),
 );
-ALTER SEQUENCE PromoSeq OWNED BY Promotion.promo_id;
+ALTER SEQUENCE SpecialPromoSeq OWNED BY Promotion.promo_id;
+
+CREATE SEQUENCE DeliveryPromoSeq;
+CREATE TABLE DeliveryPromotion (
+	promo_id			INTEGER DEFAULT nextval('DeliveryPromoSeq'),
+	startTime			TIMESTAMP NOT NULL,
+	endTime				TIMESTAMP NOT NULL,
+	discount			INTEGER NOT NULL,
+	numOrders			INTEGER,
+	PRIMARY KEY (promo_id),
+);
+ALTER SEQUENCE DeliveryPromoSeq OWNED BY Promotion.promo_id;
+
+CREATE SEQUENCE PricePromoSeq;
+CREATE TABLE PricePromotion (
+	promo_id			INTEGER DEFAULT nextval('PricePromoSeq'),
+	Rid					INTEGER NOT NULL,
+	startTime			TIMESTAMP NOT NULL,
+	endTime				TIMESTAMP NOT NULL,
+	discount			INTEGER NOT NULL,
+	PRIMARY KEY (promo_id),
+	FOREIGN KEY (Rid) REFERENCES Restaurants (Rid)
+);
+ALTER SEQUENCE PricePromoSeq OWNED BY Promotion.promo_id;
 
 CREATE SEQUENCE LidSeq;
 CREATE TABLE Locations (
 	Lid					INTEGER DEFAULT nextval('LidSeq'),
 	Cid					INTEGER,
+	LatestDate			TIMESTAMP NOT NULL,
 	address				VARCHAR(100),
 	PRIMARY KEY (Lid),
 	FOREIGN KEY (Cid) REFERENCES Customers (Cid) ON DELETE CASCADE
@@ -173,17 +207,17 @@ CREATE TABLE Feedback (
 );
 ALTER SEQUENCE feedbackSeq OWNED BY Feedback.feedback_id;
 
---change destimation accoringly
-\COPY FDSManager FROM '..\data\FDSManager.csv' DELIMITER ',' CSV HEADER;
-\COPY Customers FROM '..\data\Customers.csv' DELIMITER ',' CSV HEADER;
-\COPY Restaurants FROM '..\data\Restaurants.csv' DELIMITER ',' CSV HEADER;
-\COPY Staffs FROM '..\data\Staffs.csv' DELIMITER ',' CSV HEADER;
-\COPY FoodItem FROM '..\data\FoodItem.csv' DELIMITER ',' CSV HEADER;
-\COPY DeliveryRiders FROM '..\data\DeliveryRiders.csv' DELIMITER ',' CSV HEADER;
-\COPY Orders FROM '..\data\Orders.csv' DELIMITER ',' CSV HEADER;
-\COPY OrderedItem FROM '..\data\OrderedItem.csv' DELIMITER ',' CSV HEADER;
-\COPY Payment FROM '..\data\Payment.csv' DELIMITER ',' CSV HEADER;
-\COPY Promotion FROM '..\data\Promotion.csv' DELIMITER ',' CSV HEADER;
-\COPY Locations FROM '..\data\Locations.csv' DELIMITER ',' CSV HEADER;
-\COPY Assignment FROM '..\data\Assignment.csv' DELIMITER ',' CSV HEADER;
-\COPY Feedback FROM '..\data\Feedback.csv' DELIMITER ',' CSV HEADER;
+
+\COPY FDSManager FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\FDSManager.csv' DELIMITER ',' CSV HEADER;
+\COPY Customers FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Customers.csv' DELIMITER ',' CSV HEADER;
+\COPY Restaurants FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Restaurants.csv' DELIMITER ',' CSV HEADER;
+\COPY Staffs FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Staffs.csv' DELIMITER ',' CSV HEADER;
+\COPY FoodItem FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\FoodItem.csv' DELIMITER ',' CSV HEADER;
+\COPY DeliveryRiders FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\DeliveryRiders.csv' DELIMITER ',' CSV HEADER;
+\COPY Orders FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Orders.csv' DELIMITER ',' CSV HEADER;
+\COPY OrderedItem FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\OrderedItem.csv' DELIMITER ',' CSV HEADER;
+\COPY Payment FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Payment.csv' DELIMITER ',' CSV HEADER;
+\COPY Promotion FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Promotion.csv' DELIMITER ',' CSV HEADER;
+\COPY Locations FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Locations.csv' DELIMITER ',' CSV HEADER;
+\COPY Assignment FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Assignment.csv' DELIMITER ',' CSV HEADER;
+\COPY Feedback FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Feedback.csv' DELIMITER ',' CSV HEADER;
