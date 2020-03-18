@@ -92,14 +92,65 @@ CREATE TABLE DeliveryRiders (
 	name				VARCHAR(50) NOT NULL,
 	startDate			DATE NOT NULL,
 	terminationDate		DATE,
-	baseSalary			DECIMAL NOT NULL, -- delivery fee to be added based on the number of deliveries made in that month
-	employmentType		INTEGER NOT NULL, -- 1: fullTime, 2: partTime
 	accessRight			INTEGER NOT NULL,
-	-- shifts?
 	password			VARCHAR(100) NOT NULL,
 	PRIMARY KEY (Did)
 );
 ALTER SEQUENCE DidSeq OWNED BY DeliveryRiders.Did;
+
+CREATE TABLE PartTime (
+    Did 				INTEGER,
+    weekSalary			INTEGER,
+    weekScheduleId		INTEGER,
+    PRIMARY KEY (Did),
+    FOREIGN KEY (Did) REFERENCES DeliveryRiders
+);
+
+CREATE TABLE FullTime (
+	Did 				INTEGER,
+	monthSalary			INTEGER,
+	monthScheduleId		INTEGER,
+	PRIMARY KEY (Did),
+    FOREIGN KEY (Did) REFERENCES DeliveryRiders
+);
+
+CREATE TABLE PartTimeWeekSchedule (
+	Wid 				INTEGER,
+	day 				TEXT,
+	startTime			INTEGER,
+	endTime				INTEGER
+	PRIMARY KEY (Wid)
+);
+
+CREATE TABLE MonthSchedule (
+	Mid 				INTEGER,
+	Wid 				INTEGER,
+	PRIMARY KEY (Mid),
+	FOREIGN KEY (Wid) REFERENCES FullTimeWeekSchedule
+);
+
+CREATE TABLE FullTimeWeekSchedule (
+	Wid 				INTEGER,
+	Days				INTEGER,
+	Shift				INTEGER,
+	PRIMARY KEY (Wid), 
+	FOREIGN KEY (Days) REFERENCES Workdays
+	FOREIGN KEY (Shift) REFERENCES Shifts
+);
+
+CREATE TABLE Workdays (
+	-- Static table
+	Days 				INTEGER,
+	description			TEXT,
+	PRIMARY KEY (Days)
+);
+
+CREATE TABLE Shifts (
+	-- Static table
+	Shift 				INTEGER,
+	description 		TEXT,
+	PRIMARY KEY (Shift)
+);
 
 CREATE SEQUENCE OidSeq;
 CREATE TABLE Orders (
