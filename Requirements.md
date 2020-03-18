@@ -43,10 +43,10 @@ Submit your source code by creating a zip file named codeNN.zip, where NN is you
 
 ## User creation
 * Create, Retrieve, Update & Delete :
-* * Customer
-* * Restaurant Staff
-* * Delivery Riders
-* * FDS Managers
+  * Customer
+  * Restaurant Staff
+  * Delivery Riders
+  * FDS Managers
 
 ## User Stories
 
@@ -139,19 +139,19 @@ As an FDS Manager, I want to:
 * has a to date 
 
 - (Constraint on WWS for MWS) DayFrom, DayTo (Total 5 days)
-- - 1,5
-- - 2,6
-- - 3,7
-- - 4,1
-- - 5,2
-- - 6,3
-- - 7,4
+  - 1,5
+  - 2,6
+  - 3,7
+  - 4,1
+  - 5,2
+  - 6,3
+  - 7,4
 
 - (Constraint on WWS for MWS) Shift times HourFrom, HourTo
-- - Shift 1: 10, 14 and 15,19
-- - Shift 2: 11, 15 and 16,20
-- - Shift 3: 12, 16 and 17,21
-- - Shift 4: 13, 17 and 18,22
+  - Shift 1: 10, 14 and 15,19
+  - Shift 2: 11, 15 and 16,20
+  - Shift 3: 12, 16 and 17,21
+  - Shift 4: 13, 17 and 18,22
 
 - (Constraint) 4 WWS in MWS must be equivalent
 
@@ -250,6 +250,6 @@ As an FDS Manager, I want to:
 
 * has an id (for tracking)
 + (Description) FDS Promotion
-+ + 10% discount for a customer’s first order
-+ + free delivery during certain time periods
-+ + offer special discount coupons to targeted customers (e.g., customers who have not placed any order for the last three months)
+  + 10% discount for a customer’s first order
+  + free delivery during certain time periods
+  + offer special discount coupons to targeted customers (e.g., customers who have not placed any order for the last three months)
