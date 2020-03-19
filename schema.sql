@@ -1,9 +1,17 @@
 DROP TABLE IF EXISTS FDSManager CASCADE;
 DROP TABLE IF EXISTS Customers CASCADE;
+DROP TABLE IF EXISTS CreditCardList CASCADE;
 DROP TABLE IF EXISTS Restaurants CASCADE;
 DROP TABLE IF EXISTS Staffs CASCADE;
 DROP TABLE IF EXISTS FoodItem CASCADE;
 DROP TABLE IF EXISTS DeliveryRiders CASCADE;
+DROP TABLE IF EXISTS PartTime CASCADE;
+DROP TABLE IF EXISTS FullTime CASCADE;
+DROP TABLE IF EXISTS PartTimeWeekSchedule CASCADE;
+DROP TABLE IF EXISTS MonthSchedule CASCADE;
+DROP TABLE IF EXISTS FullTimeWeekSchedule CASCADE;
+DROP TABLE IF EXISTS Workdays CASCADE;
+DROP TABLE IF EXISTS Shifts CASCADE;
 DROP TABLE IF EXISTS Orders CASCADE;
 DROP TABLE IF EXISTS OrderedItem CASCADE;
 DROP TABLE IF EXISTS Payment CASCADE;
@@ -13,7 +21,7 @@ DROP TABLE IF EXISTS PricePromotion CASCADE;
 DROP TABLE IF EXISTS Locations CASCADE;
 DROP TABLE IF EXISTS Assignment CASCADE;
 DROP TABLE IF EXISTS Feedback CASCADE;
-DROP SEQUENCE IF EXISTS ManagerSeq, CidSeq, SidSeq, DidSeq, IOidSeq, LidSeq, OidSeq, FidSeq, PromoSeq, feedbackSeq;
+DROP SEQUENCE IF EXISTS ManagerSeq, CidSeq, SidSeq, DidSeq, PartTimeWeekSeq, FullTimeWeekSeq, MonthSeq, IOidSeq, LidSeq, OidSeq, FidSeq, PromoSeq, feedbackSeq;
 
 --accessRight 1:FDS Manageer, 2: Restaurant Staff, 3: Delivery Riders, 4: Customers
 
@@ -99,6 +107,7 @@ CREATE TABLE DeliveryRiders (
 ALTER SEQUENCE DidSeq OWNED BY DeliveryRiders.Did;
 
 CREATE TABLE PartTime (
+	-- Part time delivery driver
     Did 				INTEGER,
     weekSalary			INTEGER,
     weekScheduleId		INTEGER,
@@ -107,6 +116,7 @@ CREATE TABLE PartTime (
 );
 
 CREATE TABLE FullTime (
+	-- Full time delivery driver
 	Did 				INTEGER,
 	monthSalary			INTEGER,
 	monthScheduleId		INTEGER,
@@ -114,29 +124,86 @@ CREATE TABLE FullTime (
     FOREIGN KEY (Did) REFERENCES DeliveryRiders
 );
 
+CREATE SEQUENCE PartTimeWeekSeq;
 CREATE TABLE PartTimeWeekSchedule (
 	Wid 				INTEGER,
 	day 				TEXT,
 	startTime			INTEGER,
-	endTime				INTEGER
+	endTime				INTEGER,
 	PRIMARY KEY (Wid)
 );
+ALTER SEQUENCE PartTimeWeekSeq OWNED BY PartTimeWeekSchedule.Wid;
 
-CREATE TABLE MonthSchedule (
-	Mid 				INTEGER,
-	Wid 				INTEGER,
-	PRIMARY KEY (Mid),
-	FOREIGN KEY (Wid) REFERENCES FullTimeWeekSchedule
-);
+CREATE OR REPLACE FUNCTION valid_duration() RETURNS TRIGGER AS $valid_duration$
+	DECLARE
+		duration 	INTEGER;
+	BEGIN
+		duration := NEW.endTime - NEW.startTime;
+		IF duration <= 0 OR duration > 4 THEN
+			RAISE EXCEPTION 'Invalid work duration!';
+		END IF;
+		RETURN NULL;
+	END;
+$valid_duration$ LANGUAGE plpgsql;
 
-CREATE TABLE FullTimeWeekSchedule (
-	Wid 				INTEGER,
-	Days				INTEGER,
-	Shift				INTEGER,
-	PRIMARY KEY (Wid), 
-	FOREIGN KEY (Days) REFERENCES Workdays
-	FOREIGN KEY (Shift) REFERENCES Shifts
-);
+DROP TRIGGER IF EXISTS valid_duration ON PartTimeWeekSchedule;
+CREATE TRIGGER valid_duration 
+BEFORE INSERT OR UPDATE ON PartTimeWeekSchedule
+FOR EACH ROW
+EXECUTE PROCEDURE valid_duration();
+
+CREATE OR REPLACE FUNCTION has_break() RETURNS TRIGGER AS $has_break$
+	DECLARE
+		overlap		INTEGER;
+	BEGIN
+		SELECT P.Wid INTO overlap
+		FROM PartTimeWeekSchedule as P
+		WHERE NEW.startTime - 1 >= all (
+				SELECT P.endTime
+				FROM P
+				WHERE P.day = NEW.day
+				AND P.startTime < NEW.startTime
+				);
+		IF overlap IS NOT NULL THEN
+			RAISE EXCEPTION 'There is insufficient break from previous work';
+		END IF;
+		RETURN NULL;
+	END;
+$has_break$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS has_break ON PartTimeWeekSchedule;
+CREATE TRIGGER has_break
+AFTER INSERT OR UPDATE ON PartTimeWeekSchedule
+FOR EACH ROW
+EXECUTE PROCEDURE has_break();
+
+CREATE OR REPLACE FUNCTION valid_weekly_hours() RETURNS TRIGGER AS $valid_weekly_hours$
+	DECLARE 
+		allStart	INTEGER;
+		allEnd		INTEGER;
+		total		INTEGER;
+	BEGIN
+		SELECT sum(P.startTime) INTO allStart
+		FROM PartTimeWeekSchedule AS P
+		WHERE P.Wid = NEW.Wid;
+
+		SELECT sum(P2.endTime) INTO allEnd
+		FROM PartTimeWeekSchedule AS P2
+		WHERE P2.Wid = NEW.Wid;
+		
+		total := allEnd - allStart;
+		IF total < 10 OR total > 48 THEN
+			RAISE EXCEPTION 'Total work hours exceed valid weekly range.';
+		END IF;
+	END;
+$valid_weekly_hours$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS valid_weekly_hours ON PartTimeWeekSchedule;
+CREATE CONSTRAINT TRIGGER valid_weekly_hours
+AFTER INSERT OR UPDATE ON PartTimeWeekSchedule
+DEFERRABLE INITIALLY DEFERRED
+FOR EACH ROW
+EXECUTE PROCEDURE valid_weekly_hours();
 
 CREATE TABLE Workdays (
 	-- Static table
@@ -151,6 +218,26 @@ CREATE TABLE Shifts (
 	description 		TEXT,
 	PRIMARY KEY (Shift)
 );
+
+CREATE SEQUENCE FullTimeWeekSeq;
+CREATE TABLE FullTimeWeekSchedule (
+	Wid 				INTEGER,
+	Days				INTEGER,
+	Shift				INTEGER,
+	PRIMARY KEY (Wid), 
+	FOREIGN KEY (Days) REFERENCES Workdays,
+	FOREIGN KEY (Shift) REFERENCES Shifts
+);
+ALTER SEQUENCE FullTimeWeekSeq OWNED BY FullTimeWeekSchedule.Wid;
+
+CREATE SEQUENCE MonthSeq;
+CREATE TABLE MonthSchedule (
+	Mid 				INTEGER,
+	Wid 				INTEGER,
+	PRIMARY KEY (Mid),
+	FOREIGN KEY (Wid) REFERENCES FullTimeWeekSchedule
+);
+ALTER SEQUENCE MonthSeq OWNED BY MonthSchedule.Mid;
 
 CREATE SEQUENCE OidSeq;
 CREATE TABLE Orders (
@@ -176,7 +263,7 @@ CREATE TABLE OrderedItem (
 	quantity			INTEGER NOT NULL,
 	PRIMARY KEY (IOid),
 	FOREIGN KEY (Oid) REFERENCES Orders (Oid) ON DELETE CASCADE,
-	FOREIGN KEY (Fid, price) REFERENCES FoodItem (Fid, originalPrice)
+	FOREIGN KEY (Fid, originalPrice) REFERENCES FoodItem (Fid, originalPrice)
 );
 ALTER SEQUENCE IOidSeq OWNED BY OrderedItem.IOid;
 
@@ -258,7 +345,7 @@ CREATE TABLE Feedback (
 );
 ALTER SEQUENCE feedbackSeq OWNED BY Feedback.feedback_id;
 
-
+/*
 \COPY FDSManager FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\FDSManager.csv' DELIMITER ',' CSV HEADER;
 \COPY Customers FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Customers.csv' DELIMITER ',' CSV HEADER;
 \COPY Restaurants FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Restaurants.csv' DELIMITER ',' CSV HEADER;
@@ -272,3 +359,4 @@ ALTER SEQUENCE feedbackSeq OWNED BY Feedback.feedback_id;
 \COPY Locations FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Locations.csv' DELIMITER ',' CSV HEADER;
 \COPY Assignment FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Assignment.csv' DELIMITER ',' CSV HEADER;
 \COPY Feedback FROM 'C:\Users\User\Desktop\Y4S2\CS2102\Project\data\Feedback.csv' DELIMITER ',' CSV HEADER;
+*/
