@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS Shifts CASCADE;
 DROP TABLE IF EXISTS Orders CASCADE;
 DROP TABLE IF EXISTS OrderedItem CASCADE;
 DROP TABLE IF EXISTS Payment CASCADE;
+DROP TABLE IF EXISTS Promotion CASCADE;
 DROP TABLE IF EXISTS SpecialPromotion CASCADE;
 DROP TABLE IF EXISTS DeliveryPromotion CASCADE;
 DROP TABLE IF EXISTS PricePromotion CASCADE;
@@ -259,11 +260,10 @@ CREATE TABLE OrderedItem (
 	IOid				INTEGER DEFAULT nextval('IOidSeq'),
 	Oid					INTEGER,
 	Fid					INTEGER,
-	originalPrice		DECIMAL NOT NULL,
 	quantity			INTEGER NOT NULL,
 	PRIMARY KEY (IOid),
 	FOREIGN KEY (Oid) REFERENCES Orders (Oid) ON DELETE CASCADE,
-	FOREIGN KEY (Fid, originalPrice) REFERENCES FoodItem (Fid, originalPrice)
+	FOREIGN KEY (Fid) REFERENCES FoodItem (Fid)
 );
 ALTER SEQUENCE IOidSeq OWNED BY OrderedItem.IOid;
 
@@ -274,40 +274,38 @@ CREATE TABLE Payment (
 	FOREIGN KEY (Cid) REFERENCES Customers (Cid)
 );
 
-CREATE SEQUENCE SpecialPromoSeq;
+CREATE SEQUENCE PromoSeq;
+CREATE TABLE Promotion (
+	promo_id			INTEGER,
+	startTime			TIMESTAMP NOT NULL,
+	endTime				TIMESTAMP NOT NULL,
+	discount			INTEGER NOT NULL,
+	PRIMARY KEY (promo_id)
+);
+ALTER SEQUENCE PromoSeq OWNED BY Promotion.promo_id;
+
 CREATE TABLE SpecialPromotion (
-	promo_id			INTEGER DEFAULT nextval('SpecialPromoSeq'),
-	Cid					INTEGER,
-	startTime			TIMESTAMP NOT NULL,
-	endTime				TIMESTAMP NOT NULL,
-	discount			INTEGER NOT NULL,
+	promo_id			INTEGER,
+	cid					INTEGER NOT NULL,
 	PRIMARY KEY (promo_id),
-	FOREIGN KEY (Cid) REFERENCES Customers (Cid),
+	FOREIGN KEY (promo_id) REFERENCES Promotion (promo_id),
+	FOREIGN KEY (cid) REFERENCES Customers (Cid)
 );
-ALTER SEQUENCE SpecialPromoSeq OWNED BY Promotion.promo_id;
 
-CREATE SEQUENCE DeliveryPromoSeq;
 CREATE TABLE DeliveryPromotion (
-	promo_id			INTEGER DEFAULT nextval('DeliveryPromoSeq'),
-	startTime			TIMESTAMP NOT NULL,
-	endTime				TIMESTAMP NOT NULL,
-	discount			INTEGER NOT NULL,
-	numOrders			INTEGER,
+	promo_id			INTEGER,
+	numOrders			INTEGER NOT NULL,
 	PRIMARY KEY (promo_id),
+	FOREIGN KEY (promo_id) REFERENCES Promotion (promo_id)
 );
-ALTER SEQUENCE DeliveryPromoSeq OWNED BY Promotion.promo_id;
 
-CREATE SEQUENCE PricePromoSeq;
 CREATE TABLE PricePromotion (
-	promo_id			INTEGER DEFAULT nextval('PricePromoSeq'),
-	Rid					INTEGER NOT NULL,
-	startTime			TIMESTAMP NOT NULL,
-	endTime				TIMESTAMP NOT NULL,
-	discount			INTEGER NOT NULL,
+	promo_id			INTEGER,
+	rid					INTEGER NOT NULL,
 	PRIMARY KEY (promo_id),
-	FOREIGN KEY (Rid) REFERENCES Restaurants (Rid)
+	FOREIGN KEY (promo_id) REFERENCES Promotion (promo_id),
+	FOREIGN KEY (rid) REFERENCES Restaurants (Rid)
 );
-ALTER SEQUENCE PricePromoSeq OWNED BY Promotion.promo_id;
 
 CREATE SEQUENCE LidSeq;
 CREATE TABLE Locations (
@@ -321,13 +319,15 @@ CREATE TABLE Locations (
 ALTER SEQUENCE LidSeq OWNED BY Locations.Lid;
 
 CREATE TABLE Assignment (
-	Oid					INTEGER NOT NULL,
-	Did					INTEGER NOT NULL,
+	Oid						INTEGER,
+	Did						INTEGER NOT NULL,
 	TimeOrderPlaced			TIMESTAMP,
 	DepartTimeToRestaurant	TIMESTAMP,
 	ArrivalTimeToRestaurant	TIMESTAMP,
 	DepartTimeToCustomer	TIMESTAMP,
 	ArrivalTimeToCustomer	TIMESTAMP,
+	PRIMARY KEY (Oid),
+	UNIQUE(Oid, Did),
 	FOREIGN KEY (Oid) REFERENCES Orders (Oid),
 	FOREIGN KEY (Did) REFERENCES DeliveryRiders (Did)
 );
