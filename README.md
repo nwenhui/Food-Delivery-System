@@ -4,13 +4,13 @@ This is a food delivery system that allows different stakeholders: `FDS Manager`
 
 The application simulates the data relationship & constraints, operations such as search, access and modifications happened in the real food delivery system, where there are multiple parties participate in the system.
 
-### Tech stack:computer:
+## Tech stack :computer:
 
 Frontend: `React`
 Backend: `Ruby on Rails`
 Database: `PostgreSQL`
 
-### Documentation:ledger:
+## Documentation :ledger:
 
 **Deploy this app**
 
@@ -28,7 +28,7 @@ Database: `PostgreSQL`
 
 * We also summarised the application design, database design and other design notes in the [Google Doc](https://docs.google.com/document/d/1tIBgZZzccAGrz6OgO2Ob90ntAWP7Qoxmuoit9pwb398/edit?usp=sharing).
 
-### Contributors:busts_in_silhouette:
+## Contributors :busts_in_silhouette:
 
 * Derek https://github.com/Derek-Hardy
 * Dillen https://github.com/Dkenobi

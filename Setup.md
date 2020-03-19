@@ -167,7 +167,7 @@ npm start
 If it runs, you did it!
 
 > Note:warning::
->If there are errors in the dependency, you may delete `node_modules` and `yarn.lock` files from the folder `fds/fds-react`. Then run the command `yarn` in the terminal. Recommended to [install](https://classic.yarnpkg.com/en/docs/install#mac-stable) and use yarn as the package manager here. 
+> If there are errors in the dependency, you may delete `node_modules` and `yarn.lock` files from the folder `fds/fds-react`. Then run the command `yarn` in the terminal. Recommended to [install](https://classic.yarnpkg.com/en/docs/install#mac-stable) and use yarn as the package manager here. 
 
 ## Development environment
 
