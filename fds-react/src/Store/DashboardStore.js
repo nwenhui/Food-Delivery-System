@@ -1,5 +1,8 @@
 
 import uuid from 'uuid/v1';
+import moment from 'moment';
+
+
 class DashboardStore {
     // Customer Data
     RewardPoints = 1000;
@@ -146,6 +149,8 @@ class DashboardStore {
       }
   ];
 
+  // fds manager
+  searchDate = moment();
 
 }
 

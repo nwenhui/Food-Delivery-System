@@ -1,13 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import { dashboardStore } from 'Store/DashboardStore'
+import moment from 'moment';
 
 import {
-  NumOrdersR,
   Salary,
   NumHours,
   PastDeliveries
 } from './components';
+
+import MonthYear from '../../components/MonthYear';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,6 +20,12 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+
+  // handlesubmit gets triggered whenever calendar is clicked
+  const handleSubmit = (e) => {
+    console.log("Date = ", e)
+    dashboardStore.searchDate = e;
+  }
 
   return (
     <div className={classes.root}>
@@ -32,7 +41,10 @@ const Dashboard = () => {
           xl={4}
           xs={12}
         >
-          <NumOrdersR />
+          <MonthYear 
+            defaultValue={dashboardStore.searchDate}
+            onClick={(e) => handleSubmit(e)}
+          />
         </Grid>
         <Grid
           item

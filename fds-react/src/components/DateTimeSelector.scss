@@ -1,0 +1,28 @@
+.rc-time-picker-panel-inner{
+	width: 100%;
+
+	.rc-time-picker-panel-select {
+		width: 50%;
+	}
+}
+
+.ant-calendar-picker-input {
+	width: 134px;
+	padding: 0;
+	border-radius: 3px;
+	line-height: 1;
+	height: 30px;
+	padding-left: 6px;
+	font-size: 19px;
+	border: 0;
+	background-color: #e8e8e8;
+	margin-right: 5px;
+	color: #3f3f3f;
+	cursor: pointer;
+}
+
+a:not([href]):not([tabindex]) {
+	&.rc-calendar-today-btn {
+		color: #f44336;
+	}
+}
