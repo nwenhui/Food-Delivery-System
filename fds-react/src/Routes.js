@@ -26,16 +26,34 @@ const Routes = () => {
         from="/"
         to="/dashboard"
       /> */}
-      <Route 
-        exact 
-        path='/' 
-        component={LoginView} 
+      <Route
+        exact
+        path='/'
+        component={LoginView}
       />
       <RouteWithLayout
         component={DashboardView}
         exact
         layout={MainLayout}
-        path="/dashboard"
+        path="/manager_dashboard"
+      />
+      <RouteWithLayout
+        component={DashboardView}
+        exact
+        layout={MainLayout}
+        path="/staff_dashboard"
+      />
+      <RouteWithLayout
+        component={DashboardView}
+        exact
+        layout={MainLayout}
+        path="/rider_dashboard"
+      />
+      <RouteWithLayout
+        component={DashboardView}
+        exact
+        layout={MainLayout}
+        path="/customer_dashboard"
       />
       <RouteWithLayout
         component={UserListView}
