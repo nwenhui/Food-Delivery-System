@@ -32,6 +32,12 @@ const Routes = () => {
         component={LoginView}
       />
       <RouteWithLayout
+        component={SignUpView}
+        exact
+        layout={MinimalLayout}
+        path="/signup"
+      />
+      <RouteWithLayout
         component={DashboardView}
         exact
         layout={MainLayout}

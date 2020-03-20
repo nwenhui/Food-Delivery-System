@@ -1,9 +1,9 @@
 @media all and (min-width: 480px) {
-	.Login {
+	.SignUp {
 		padding: 60px 0;
 	}
 
-	.Login form {
+	.SignUp form {
 		margin: 0 auto;
 		max-width: 500px;
 	}
@@ -33,15 +33,17 @@ form {
 .form-group {
 	display: flex;
   justify-content: space-between;
-  margin: 5px;
+  margin: 10px;
 	height: 30px;
 
 	label {
 		padding-top: 6px;
-		width: 100px;
+    padding-right: 1px;
+		width: 160px;
 	}
 
 	.input {
+    margin-left: 5px;
 		border-radius: 4px;
 	}
 }
