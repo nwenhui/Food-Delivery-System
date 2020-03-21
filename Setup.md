@@ -129,7 +129,7 @@ https://gorails.com/setup/ubuntu/19.10
 
 ## Deploy the Food-Delivery-App
 
-Clone this repo to your local folder. Once completed, navigate to the project folder `fds/` in Terminal and then run the following:
+Clone this repo to your local folder. Once completed, navigate to the project folder `backend/` in Terminal and then run the following:
 
 ```shell
 bundle install
