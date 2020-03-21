@@ -7,7 +7,8 @@ import {
   Minimal as MinimalLayout,
   Customer as CustomerLayout,
   Manager as ManagerLayout,
-  Rider as RiderLayout } from './layouts';
+  Rider as RiderLayout,
+  Staff as StaffLayout } from './layouts';
 
 import {
   Login as LoginView,
@@ -16,6 +17,7 @@ import {
   RiderDashboard as RiderDashboardView,
   RiderSchedule as RiderScheduleView,
   ManagerDashboard as ManagerDashboardView,
+  StaffDashboard as StaffDashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
   Typography as TypographyView,
@@ -53,9 +55,9 @@ const Routes = () => {
         path="/manager_dashboard"
       />
       <RouteWithLayout
-        component={DashboardView}
+        component={StaffDashboardView}
         exact
-        layout={MainLayout}
+        layout={StaffLayout}
         path="/staff_dashboard"
       />
       <RouteWithLayout

@@ -8,6 +8,7 @@ export { default as CustomerDashboard } from './CustomerDashboard';
 export { default as ManagerDashboard } from './ManagerDashboard';
 export { default as RiderDashboard } from './RiderDashboard';
 export { default as RiderSchedule } from './RiderSchedule';
+export { default as StaffDashboard } from './StaffDashboard';
 export { default as Settings } from './Settings';
 export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
