@@ -4,6 +4,7 @@ export { default as Icons } from './Icons';
 export { default as NotFound } from './NotFound';
 export { default as ProductList } from './ProductList';
 export { default as Login } from './Login';
+export { default as CustomerDashboard } from './CustomerDashboard';
 export { default as RiderDashboard } from './RiderDashboard';
 export { default as RiderSchedule } from './RiderSchedule';
 export { default as Settings } from './Settings';

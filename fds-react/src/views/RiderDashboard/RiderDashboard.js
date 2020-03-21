@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RiderSchedule = () => {
+const RiderDashboard = () => {
   const classes = useStyles();
 
   return (
@@ -84,4 +84,4 @@ const RiderSchedule = () => {
   );
 };
 
-export default RiderSchedule;
+export default RiderDashboard;

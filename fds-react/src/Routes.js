@@ -5,10 +5,12 @@ import { RouteWithLayout } from './components';
 import {
   Main as MainLayout,
   Minimal as MinimalLayout,
+  Customer as CustomerLayout,
   Rider as RiderLayout } from './layouts';
 
 import {
   Login as LoginView,
+  CustomerDashboard as CustomerDashboardView,
   Dashboard as DashboardView,
   RiderDashboard as RiderDashboardView,
   RiderSchedule as RiderScheduleView,
@@ -67,9 +69,9 @@ const Routes = () => {
         path="/rider_schedule"
       />
       <RouteWithLayout
-        component={DashboardView}
+        component={CustomerDashboardView}
         exact
-        layout={MainLayout}
+        layout={CustomerLayout}
         path="/customer_dashboard"
       />
       <RouteWithLayout

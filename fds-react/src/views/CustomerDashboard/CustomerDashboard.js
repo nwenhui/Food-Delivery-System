@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import DateFnsUtils from '@date-io/date-fns';
-import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import {
-  PastScheduleList
+  TotalCustOrders,
+  RewardPoints,
+  PastOrders
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 
 const RiderSchedule = () => {
   const classes = useStyles();
-  const [selectedDate, handleDateChange] = useState(new Date());
 
   return (
     <div className={classes.root}>
@@ -28,40 +27,46 @@ const RiderSchedule = () => {
         >
         <Grid
           item
-          lg={3}
-          sm={3}
-          xl={3}
+          lg={2}
+          sm={2}
+          xl={2}
           xs={0}
         >
         </Grid>
           <Grid
             item
-            lg={9}
-            sm={9}
-            xl={9}
-            xs={12}
+            lg={5}
+            sm={5}
+            xl={5}
+            xs={6}
           >
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker value={selectedDate} onChange={handleDateChange} />
-          </MuiPickersUtilsProvider>
+            <TotalCustOrders />
           </Grid>
-
           <Grid
             item
-            lg={3}
-            md={3}
-            xl={3}
+            lg={5}
+            sm={5}
+            xl={5}
+            xs={6}
+          >
+            <RewardPoints />
+          </Grid>
+          <Grid
+            item
+            lg={2}
+            md={2}
+            xl={2}
             xs={0}
           >
           </Grid>
           <Grid
             item
-            lg={9}
-            md={9}
-            xl={9}
+            lg={10}
+            md={10}
+            xl={10}
             xs={12}
           >
-            <PastScheduleList />
+            <PastOrders />
           </Grid>
         </Grid>
 
