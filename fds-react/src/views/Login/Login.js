@@ -5,7 +5,7 @@ import "./Login.scss";
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usertype, setType] = useState(0);
+  const [usertype, setType] = useState(1);
 
   const options = [
     { value: 1, label: 'FDS Manager' },

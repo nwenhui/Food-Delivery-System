@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Customer = props => {
+const Manager = props => {
   const { children } = props;
 
   const classes = useStyles();
@@ -64,8 +64,8 @@ const Customer = props => {
   );
 };
 
-Customer.propTypes = {
+Manager.propTypes = {
   children: PropTypes.node
 };
 
-export default Customer;
+export default Manager;
