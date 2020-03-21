@@ -2,11 +2,15 @@ import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
-import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
+import {
+  Main as MainLayout,
+  Minimal as MinimalLayout,
+  Rider as RiderLayout } from './layouts';
 
 import {
   Login as LoginView,
   Dashboard as DashboardView,
+  RiderDashboard as RiderDashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
   Typography as TypographyView,
@@ -50,9 +54,9 @@ const Routes = () => {
         path="/staff_dashboard"
       />
       <RouteWithLayout
-        component={DashboardView}
+        component={RiderDashboardView}
         exact
-        layout={MainLayout}
+        layout={RiderLayout}
         path="/rider_dashboard"
       />
       <RouteWithLayout
