@@ -6,7 +6,7 @@ import {
   TotalOrders,
   TotalHours,
   Salary,
-  Sidebar
+  DeliveryList
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -60,6 +60,23 @@ const RiderDashboard = () => {
             xs={12}
           >
             <Salary />
+          </Grid>
+          <Grid
+            item
+            lg={3}
+            md={3}
+            xl={3}
+            xs={0}
+          >
+          </Grid>
+          <Grid
+            item
+            lg={9}
+            md={9}
+            xl={9}
+            xs={12}
+          >
+            <DeliveryList />
           </Grid>
         </Grid>
 
