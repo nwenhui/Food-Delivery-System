@@ -11,6 +11,7 @@ import {
   Login as LoginView,
   Dashboard as DashboardView,
   RiderDashboard as RiderDashboardView,
+  RiderSchedule as RiderScheduleView,
   ProductList as ProductListView,
   UserList as UserListView,
   Typography as TypographyView,
@@ -58,6 +59,12 @@ const Routes = () => {
         exact
         layout={RiderLayout}
         path="/rider_dashboard"
+      />
+      <RouteWithLayout
+        component={RiderScheduleView}
+        exact
+        layout={RiderLayout}
+        path="/rider_schedule"
       />
       <RouteWithLayout
         component={DashboardView}

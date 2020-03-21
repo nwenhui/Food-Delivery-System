@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
@@ -51,7 +51,7 @@ const Sidebar = props => {
     {
       title: 'Schedule',
       href: '/rider_schedule',
-      icon: <PeopleIcon />
+      icon: <DateRangeIcon />
     }
   ];
 

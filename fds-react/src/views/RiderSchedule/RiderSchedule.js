@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import {
-  TotalOrders,
-  TotalHours,
-  Salary,
-  DeliveryList
+  PastScheduleList
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -15,8 +14,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RiderSchedule = () => {
+const RiderDashboard = () => {
   const classes = useStyles();
+  const [selectedDate, handleDateChange] = useState(new Date());
 
   return (
     <div className={classes.root}>
@@ -36,31 +36,16 @@ const RiderSchedule = () => {
         </Grid>
           <Grid
             item
-            lg={3}
-            sm={3}
-            xl={3}
+            lg={9}
+            sm={9}
+            xl={9}
             xs={12}
           >
-            <TotalOrders />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DatePicker value={selectedDate} onChange={handleDateChange} />
+          </MuiPickersUtilsProvider>
           </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={3}
-            xl={3}
-            xs={12}
-          >
-            <TotalHours />
-          </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={3}
-            xl={3}
-            xs={12}
-          >
-            <Salary />
-          </Grid>
+
           <Grid
             item
             lg={3}
@@ -76,7 +61,7 @@ const RiderSchedule = () => {
             xl={9}
             xs={12}
           >
-            <DeliveryList />
+            <PastScheduleList />
           </Grid>
         </Grid>
 
@@ -84,4 +69,4 @@ const RiderSchedule = () => {
   );
 };
 
-export default RiderSchedule;
+export default RiderDashboard;
