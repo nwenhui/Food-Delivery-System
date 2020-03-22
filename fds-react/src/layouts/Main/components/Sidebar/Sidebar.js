@@ -13,6 +13,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import SearchIcon from '@material-ui/icons/Search';
 import RateReviewIcon from '@material-ui/icons/RateReview';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 
 import { Profile, SidebarNav } from './components';
 
@@ -59,6 +60,11 @@ const Sidebar = props => {
       title: 'Reviews',
       href: '/reviews',
       icon: <RateReviewIcon/>
+    },
+    {
+      title: 'Latest Delivery',
+      href: '/latest_delivery',
+      icon: <HourglassEmptyIcon/>
     },
     {
       title: 'Users',

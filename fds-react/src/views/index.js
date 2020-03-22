@@ -13,3 +13,4 @@ export { default as Typography } from './Typography';
 export { default as UserList } from './UserList';
 export { default as SearchC } from './SearchC';
 export { default as ReviewC } from './ReviewC';
+export { default as DeliveryC } from './DeliveryC';
