@@ -1,9 +1,11 @@
+DROP TABLE IF EXISTS UserAccount CASCADE;
 DROP TABLE IF EXISTS FDSManager CASCADE;
 DROP TABLE IF EXISTS Customers CASCADE;
 DROP TABLE IF EXISTS CreditCardList CASCADE;
 DROP TABLE IF EXISTS Restaurants CASCADE;
 DROP TABLE IF EXISTS Staffs CASCADE;
 DROP TABLE IF EXISTS FoodItem CASCADE;
+DROP TABLE IF EXISTS FoodCategories CASCADE;
 DROP TABLE IF EXISTS DeliveryRiders CASCADE;
 DROP TABLE IF EXISTS PartTime CASCADE;
 DROP TABLE IF EXISTS FullTime CASCADE;
@@ -26,92 +28,111 @@ DROP SEQUENCE IF EXISTS ManagerSeq, CidSeq, SidSeq, DidSeq, PartTimeWeekSeq, Ful
 
 --accessRight 1:FDS Manageer, 2: Restaurant Staff, 3: Delivery Riders, 4: Customers
 
+CREATE SEQUENCE UserAccountSeq;
+CREATE TABLE UserAccount (
+	uid INTEGER DEFAULT nextval('UserAccountSeq'),
+	userName 	VARCHAR(100) NOT NULL,
+	password 	VARCHAR(100) NOT NULL,
+	accessRight INTEGER NOT NULL,
+	PRIMARY KEY (uid),
+	UNIQUE (userName)
+);
+ALTER SEQUENCE UserAccountSeq OWNED BY userAccount.uid;
+
 CREATE SEQUENCE ManagerSeq;
 CREATE TABLE FDSManager (
-	manager_id 			INTEGER DEFAULT nextval('ManagerSeq'),
-	accessRight			INTEGER NOT NULL,
-	password			VARCHAR(100) NOT NULL,
-	PRIMARY KEY (manager_id)
+	mid 	INTEGER DEFAULT nextval('ManagerSeq'),
+	uid 	INTEGER,
+	mname 	VARCHAR(100) NOT NULL,
+	PRIMARY KEY (mid),
+	FOREIGN KEY (uid) REFERENCES UserAccount (uid) ON DELETE CASCADE 
 );
-ALTER SEQUENCE ManagerSeq OWNED BY FDSManager.manager_id;
+ALTER SEQUENCE ManagerSeq OWNED BY FDSManager.mid;
 
 CREATE SEQUENCE CidSeq;
 CREATE TABLE Customers (
-	Cid					INTEGER DEFAULT nextval('CidSeq'),
-	name				VARCHAR(50) NOT NULL,
-	numOrders			INTEGER,
-	rewardPoints		INTEGER,
-	currentAddress		VARCHAR(100) NOT NULL,
-	lastOrderTime		TIMESTAMP,
-	createdDate			DATE NOT NULL,
-	accessRight			INTEGER NOT NULL,
-	password			VARCHAR(100) NOT NULL,
-	PRIMARY KEY (Cid)
+	cid 			INTEGER DEFAULT nextval('CidSeq'),
+	uid 			INTEGER,
+	name 			VARCHAR(50) NOT NULL,
+	numOrders 		INTEGER,
+	rewardPoints 	INTEGER,
+	currentAddress 	VARCHAR(100) NOT NULL,
+	lastOrderTime 	TIMESTAMP,
+	createdDate 	DATE NOT NULL,
+	PRIMARY KEY (cid),
+	FOREIGN KEY (uid) REFERENCES UserAccount (uid) ON DELETE CASCADE 
 );
-ALTER SEQUENCE CidSeq OWNED BY Customers.Cid;
+ALTER SEQUENCE CidSeq OWNED BY Customers.cid;
 
 CREATE TABLE CreditCardList (
-	Cid					INTEGER,
-	creditCardNumber	bigint,
+	ccid 				INTEGER,
+	creditCardNumber 	bigint,
 	PRIMARY KEY (creditCardNumber),
-	FOREIGN KEY (Cid) REFERENCES Customers (Cid) ON DELETE CASCADE
+	FOREIGN KEY (ccid) REFERENCES Customers (cid) ON DELETE CASCADE
 );
 
 CREATE SEQUENCE RidSeq;
 CREATE TABLE Restaurants (
-	Rid					INTEGER DEFAULT nextval('RidSeq'),
-	name				VARCHAR(50) NOT NULL,
-	minAmount			DECIMAL NOT NULL,
-	address				VARCHAR(100) NOT NULL,
-	PRIMARY KEY (Rid)
+	rid 		INTEGER DEFAULT nextval('RidSeq'),
+	name 		VARCHAR(50) NOT NULL,
+	minAmount 	DECIMAL NOT NULL,
+	address 	VARCHAR(100) NOT NULL,
+	PRIMARY KEY (rid)
 );
-ALTER SEQUENCE RidSeq OWNED BY Restaurants.Rid;
+ALTER SEQUENCE RidSeq OWNED BY Restaurants.rid;
 
 CREATE SEQUENCE SidSeq;
 CREATE TABLE Staffs (
-	Sid					INTEGER DEFAULT nextval('SidSeq'),
-	Rid					INTEGER NOT NULL,
-	name				VARCHAR(50) NOT NULL,
-	hireDate			DATE NOT NULL,
-	terminationDate 	DATE,
-	accessRight			INTEGER NOT NULL,
-	password			VARCHAR(100) NOT NULL,
+	sid 			INTEGER DEFAULT nextval('SidSeq'),
+	uid 			INTEGER,
+	rid 			INTEGER NOT NULL,
+	name 			VARCHAR(50) NOT NULL,
+	hireDate 		DATE NOT NULL,
+	terminationDate DATE,
 	PRIMARY KEY (Sid),
-	FOREIGN KEY (Rid) REFERENCES Restaurants (Rid) ON DELETE CASCADE
+	FOREIGN KEY (rid) REFERENCES Restaurants (rid) ON DELETE CASCADE,
+	FOREIGN KEY (uid) REFERENCES UserAccount (uid) ON DELETE CASCADE 
 );
 ALTER SEQUENCE SidSeq OWNED BY Staffs.Sid;
 
 CREATE SEQUENCE FidSeq;
 CREATE TABLE FoodItem (
-	Fid					INTEGER DEFAULT nextval('FidSeq'),
-	Rid					INTEGER NOT NULL,
-	name				VARCHAR(50) NOT NULL,
-	originalPrice		DECIMAL NOT NULL,
-	categories			VARCHAR(10) NOT NULL,
-	dailyLimit			INTEGER NOT NULL,
-	availabilityStatus	INTEGER, -- to reset to dailyLimit daily
+	Fid 				INTEGER DEFAULT nextval('FidSeq'),
+	rid					INTEGER NOT NULL,
+	name 				VARCHAR(50) NOT NULL,
+	originalPrice 		DECIMAL NOT NULL,
+	categories 			VARCHAR(10) NOT NULL,
+	dailyLimit 			INTEGER NOT NULL,
+	availabilityStatus 	INTEGER, -- to reset to dailyLimit daily
 	PRIMARY KEY (Fid),
-	FOREIGN KEY (Rid) REFERENCES Restaurants (Rid) ON DELETE CASCADE
+	FOREIGN KEY (rid) REFERENCES Restaurants (rid) ON DELETE CASCADE
 );
 ALTER SEQUENCE FidSeq OWNED BY FoodItem.Fid;
+
+CREATE TABLE FoodCategories (
+	fcid 	INTEGER,
+	name 	VARCHAR(100),
+	UNIQUE (name),
+	FOREIGN KEY (fcid) REFERENCES FoodItem (Fid)
+);
 
 CREATE SEQUENCE DidSeq;
 CREATE TABLE DeliveryRiders (
 	Did					INTEGER DEFAULT nextval('DidSeq'),
-	name				VARCHAR(50) NOT NULL,
-	startDate			DATE NOT NULL,
-	terminationDate		DATE,
-	accessRight			INTEGER NOT NULL,
-	password			VARCHAR(100) NOT NULL,
-	PRIMARY KEY (Did)
+	uid					INTEGER,
+	name 				VARCHAR(50) NOT NULL,
+	startDate 			DATE NOT NULL,
+	terminationDate 	DATE,
+	PRIMARY KEY (Did),
+	FOREIGN KEY (uid) REFERENCES UserAccount (uid) ON DELETE CASCADE 
 );
 ALTER SEQUENCE DidSeq OWNED BY DeliveryRiders.Did;
 
 CREATE TABLE PartTime (
 	-- Part time delivery driver
     Did 				INTEGER,
-    weekSalary			INTEGER,
-    weekScheduleId		INTEGER,
+    weekSalary 			INTEGER,
+    weekScheduleId 		INTEGER,
     PRIMARY KEY (Did),
     FOREIGN KEY (Did) REFERENCES DeliveryRiders
 );
@@ -129,8 +150,8 @@ CREATE SEQUENCE PartTimeWeekSeq;
 CREATE TABLE PartTimeWeekSchedule (
 	Wid 				INTEGER,
 	day 				TEXT,
-	startTime			INTEGER,
-	endTime				INTEGER,
+	startTime 			INTEGER,
+	endTime 			INTEGER,
 	PRIMARY KEY (Wid)
 );
 ALTER SEQUENCE PartTimeWeekSeq OWNED BY PartTimeWeekSchedule.Wid;
@@ -223,8 +244,8 @@ CREATE TABLE Shifts (
 CREATE SEQUENCE FullTimeWeekSeq;
 CREATE TABLE FullTimeWeekSchedule (
 	Wid 				INTEGER,
-	Days				INTEGER,
-	Shift				INTEGER,
+	Days 				INTEGER,
+	Shift 				INTEGER,
 	PRIMARY KEY (Wid), 
 	FOREIGN KEY (Days) REFERENCES Workdays,
 	FOREIGN KEY (Shift) REFERENCES Shifts
@@ -245,10 +266,10 @@ CREATE TABLE Orders (
 	Oid					INTEGER DEFAULT nextval('OidSeq'),
 	Did					INTEGER NOT NULL,
 	Cid					INTEGER NOT NULL,
-	cost				DECIMAL NOT NULL,
-	location			VARCHAR(100) NOT NULL,
-	orderTime			TIMESTAMP NOT NULL,
-	deliveryCost		DECIMAL NOT NULL,
+	cost 				DECIMAL NOT NULL,
+	location 			VARCHAR(100) NOT NULL,
+	orderTime 			TIMESTAMP NOT NULL,
+	deliveryCost 		DECIMAL NOT NULL,
 	PRIMARY KEY (Oid),
 	FOREIGN KEY (Did) REFERENCES DeliveryRiders (Did),
 	FOREIGN KEY (Cid) REFERENCES Customers (Cid) ON DELETE CASCADE
@@ -257,10 +278,10 @@ ALTER SEQUENCE OidSeq OWNED BY Orders.Oid;
 
 CREATE SEQUENCE IOidSeq;
 CREATE TABLE OrderedItem (
-	IOid				INTEGER DEFAULT nextval('IOidSeq'),
-	Oid					INTEGER,
-	Fid					INTEGER,
-	quantity			INTEGER NOT NULL,
+	IOid 			INTEGER DEFAULT nextval('IOidSeq'),
+	Oid				INTEGER,
+	Fid				INTEGER,
+	quantity 		INTEGER NOT NULL,
 	PRIMARY KEY (IOid),
 	FOREIGN KEY (Oid) REFERENCES Orders (Oid) ON DELETE CASCADE,
 	FOREIGN KEY (Fid) REFERENCES FoodItem (Fid)
@@ -268,51 +289,51 @@ CREATE TABLE OrderedItem (
 ALTER SEQUENCE IOidSeq OWNED BY OrderedItem.IOid;
 
 CREATE TABLE Payment (
-	Oid					INTEGER PRIMARY KEY REFERENCES Orders ON DELETE CASCADE,
-	Cid					INTEGER NOT NULL,
-	cash				BOOLEAN NOT NULL,
+	Oid		INTEGER PRIMARY KEY REFERENCES Orders ON DELETE CASCADE,
+	Cid		INTEGER NOT NULL,
+	cash 	BOOLEAN NOT NULL,
 	FOREIGN KEY (Cid) REFERENCES Customers (Cid)
 );
 
 CREATE SEQUENCE PromoSeq;
 CREATE TABLE Promotion (
-	promo_id			INTEGER,
-	startTime			TIMESTAMP NOT NULL,
-	endTime				TIMESTAMP NOT NULL,
-	discount			INTEGER NOT NULL,
+	promo_id 		INTEGER,
+	startTime 		TIMESTAMP NOT NULL,
+	endTime 		TIMESTAMP NOT NULL,
+	discount 		INTEGER NOT NULL,
 	PRIMARY KEY (promo_id)
 );
 ALTER SEQUENCE PromoSeq OWNED BY Promotion.promo_id;
 
 CREATE TABLE SpecialPromotion (
-	promo_id			INTEGER,
-	cid					INTEGER NOT NULL,
+	promo_id 	INTEGER,
+	cid			INTEGER NOT NULL,
 	PRIMARY KEY (promo_id),
 	FOREIGN KEY (promo_id) REFERENCES Promotion (promo_id),
 	FOREIGN KEY (cid) REFERENCES Customers (Cid)
 );
 
 CREATE TABLE DeliveryPromotion (
-	promo_id			INTEGER,
-	numOrders			INTEGER NOT NULL,
+	promo_id 	INTEGER,
+	numOrders 	INTEGER NOT NULL,
 	PRIMARY KEY (promo_id),
 	FOREIGN KEY (promo_id) REFERENCES Promotion (promo_id)
 );
 
 CREATE TABLE PricePromotion (
-	promo_id			INTEGER,
-	rid					INTEGER NOT NULL,
+	promo_id 	INTEGER,
+	rid 		INTEGER NOT NULL,
 	PRIMARY KEY (promo_id),
 	FOREIGN KEY (promo_id) REFERENCES Promotion (promo_id),
-	FOREIGN KEY (rid) REFERENCES Restaurants (Rid)
+	FOREIGN KEY (rid) REFERENCES Restaurants (rid)
 );
 
 CREATE SEQUENCE LidSeq;
 CREATE TABLE Locations (
-	Lid					INTEGER DEFAULT nextval('LidSeq'),
-	Cid					INTEGER,
-	LatestDate			TIMESTAMP NOT NULL,
-	address				VARCHAR(100),
+	Lid			INTEGER DEFAULT nextval('LidSeq'),
+	Cid			INTEGER,
+	LatestDate	TIMESTAMP NOT NULL,
+	address		VARCHAR(100),
 	PRIMARY KEY (Lid),
 	FOREIGN KEY (Cid) REFERENCES Customers (Cid) ON DELETE CASCADE
 );
@@ -321,11 +342,11 @@ ALTER SEQUENCE LidSeq OWNED BY Locations.Lid;
 CREATE TABLE Assignment (
 	Oid						INTEGER,
 	Did						INTEGER NOT NULL,
-	TimeOrderPlaced			TIMESTAMP,
-	DepartTimeToRestaurant	TIMESTAMP,
-	ArrivalTimeToRestaurant	TIMESTAMP,
-	DepartTimeToCustomer	TIMESTAMP,
-	ArrivalTimeToCustomer	TIMESTAMP,
+	TimeOrderPlaced 		TIMESTAMP,
+	DepartTimeToRestaurant 	TIMESTAMP,
+	ArrivalTimeToRestaurant TIMESTAMP,
+	DepartTimeToCustomer 	TIMESTAMP,
+	ArrivalTimeToCustomer 	TIMESTAMP,
 	PRIMARY KEY (Oid),
 	UNIQUE(Oid, Did),
 	FOREIGN KEY (Oid) REFERENCES Orders (Oid),
@@ -334,13 +355,13 @@ CREATE TABLE Assignment (
 
 CREATE SEQUENCE feedbackSeq;
 CREATE TABLE Feedback (
-	feedback_id			INTEGER DEFAULT nextval('feedbackSeq'),
-	Rid					INTEGER,
-	Did					INTEGER,
-	review				VARCHAR(500),
-	rating				INTEGER NOT NULL,
+	feedback_id 	INTEGER DEFAULT nextval('feedbackSeq'),
+	rid 			INTEGER,
+	Did 			INTEGER,
+	review 			VARCHAR(500),
+	rating 			INTEGER NOT NULL,
 	PRIMARY KEY (feedback_id),
-	FOREIGN KEY (Rid) REFERENCES Restaurants (Rid), -- reviews for restaurants
+	FOREIGN KEY (rid) REFERENCES Restaurants (rid), -- reviews for restaurants
 	FOREIGN KEY (Did) REFERENCES DeliveryRiders (Did) -- reviews for delivery riders
 );
 ALTER SEQUENCE feedbackSeq OWNED BY Feedback.feedback_id;
