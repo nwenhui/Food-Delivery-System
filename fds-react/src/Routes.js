@@ -3,10 +3,13 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
+import { userStore } from 'Store/UserStore';
 
 import {
   Login as LoginView,
   Dashboard as DashboardView,
+  DashboardC as DashboardCView,
+  DashboardR as DashboardRView,
   ProductList as ProductListView,
   UserList as UserListView,
   Typography as TypographyView,
@@ -31,12 +34,22 @@ const Routes = () => {
         path='/' 
         component={LoginView} 
       />
-      <RouteWithLayout
-        component={DashboardView}
-        exact
-        layout={MainLayout}
-        path="/dashboard"
-      />
+      { userStore.accessRights == 2 &&
+        <RouteWithLayout
+          component={DashboardCView}
+          exact
+          layout={MainLayout}
+          path="/dashboard"
+        />
+      }
+      {userStore.accessRights == 1 &&
+        <RouteWithLayout
+          component={DashboardRView}
+          exact
+          layout={MainLayout}
+          path="/dashboard"
+        />
+      }
       <RouteWithLayout
         component={UserListView}
         exact

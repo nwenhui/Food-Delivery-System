@@ -1,5 +1,7 @@
 export { default as Account } from './Account';
 export { default as Dashboard } from './Dashboard';
+export { default as DashboardC } from './DashboardC';
+export { default as DashboardR } from './DashboardR';
 export { default as Icons } from './Icons';
 export { default as NotFound } from './NotFound';
 export { default as ProductList } from './ProductList';

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import {
-  NumOrdersR,
+  NumDeliveries,
   Salary,
   NumHours,
   PastDeliveries
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DashboardRider = () => {
+const DashboardR = () => {
   const classes = useStyles();
 
   return (
@@ -32,7 +32,7 @@ const DashboardRider = () => {
           xl={4}
           xs={12}
         >
-          <NumOrdersR />
+          <NumDeliveries />
         </Grid>
         <Grid
           item
@@ -66,4 +66,4 @@ const DashboardRider = () => {
   );
 };
 
-export default DashboardRider;
+export default DashboardR;
