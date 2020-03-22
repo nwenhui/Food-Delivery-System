@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { SearchToolbar } from './component';
-
+import { FoodItem, RestaurantFoodItem, RestaurantReview } from './component';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +25,9 @@ const SearchC = () => {
   return (
     <div className={classes.root}>
       <SearchToolbar />
-
+      <FoodItem />
+      <RestaurantFoodItem />
+      <RestaurantReview />
     </div>
   );
 };
