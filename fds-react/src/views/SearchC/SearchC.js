@@ -1,69 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import { SearchToolbar } from './component';
 
-import {
-  NumDeliveries,
-  Salary,
-  NumHours,
-  PastDeliveries
-} from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(3)
+  },
+  content: {
+    marginTop: theme.spacing(2)
+  },
+  pagination: {
+    marginTop: theme.spacing(3),
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   }
 }));
 
-const DashboardR = () => {
+const SearchC = () => {
   const classes = useStyles();
+
 
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        spacing={4}
-        className="test"
-      >
-        <Grid
-          item
-          lg={4}
-          sm={4}
-          xl={4}
-          xs={12}
-        >
-          <NumDeliveries />
-        </Grid>
-        <Grid
-          item
-          lg={4}
-          sm={6}
-          xl={4}
-          xs={12}
-        >
-          <NumHours />
-        </Grid>
-        <Grid
-          item
-          lg={4}
-          sm={4}
-          xl={4}
-          xs={12}
-        >
-          <Salary />
-        </Grid>
-        <Grid
-          item
-          lg={12}
-          md={12}
-          xl={12}
-          xs={12}
-        >
-          <PastDeliveries />
-        </Grid>
-      </Grid>
+      <SearchToolbar />
+
     </div>
   );
 };
 
-export default DashboardR;
+export default SearchC;

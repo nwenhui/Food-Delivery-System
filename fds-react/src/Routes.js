@@ -11,6 +11,7 @@ import {
   DashboardC as DashboardCView,
   DashboardR as DashboardRView,
   ProductList as ProductListView,
+  SearchC as SearchCView,
   UserList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
@@ -55,6 +56,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/users"
+      />
+      <RouteWithLayout
+        component={SearchCView}
+        exact
+        layout={MainLayout}
+        path="/search"
       />
       <RouteWithLayout
         component={ProductListView}

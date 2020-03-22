@@ -27,12 +27,6 @@ const Login = (props) => {
   //     alert(e.message);
   //   }
   // }
-  const options = [
-    { value: 1, label: 'FDS Manager' },
-    { value: 2, label: 'Staff' },
-    { value: 3, label: 'Rider' },
-    { value: 4, label: 'Customer' }
-  ];
 
   return (
     

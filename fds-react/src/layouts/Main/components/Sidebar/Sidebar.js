@@ -11,6 +11,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import SearchIcon from '@material-ui/icons/Search';
 
 import { Profile, SidebarNav } from './components';
 
@@ -47,6 +48,11 @@ const Sidebar = props => {
       title: 'Dashboard',
       href: '/dashboard',
       icon: <DashboardIcon />
+    },
+    {
+      title: 'Search',
+      href: '/search',
+      icon: <SearchIcon/>
     },
     {
       title: 'Users',
