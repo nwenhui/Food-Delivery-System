@@ -6,6 +6,7 @@ export { default as ProductList } from './ProductList';
 export { default as Login } from './Login';
 export { default as CustomerDashboard } from './CustomerDashboard';
 export { default as CustomerCheckout } from './CustomerCheckout';
+export { default as CustomerSearch } from './CustomerSearch';
 export { default as ManagerDashboard } from './ManagerDashboard';
 export { default as RiderDashboard } from './RiderDashboard';
 export { default as RiderSchedule } from './RiderSchedule';
