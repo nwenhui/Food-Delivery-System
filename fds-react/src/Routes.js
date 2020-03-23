@@ -14,6 +14,7 @@ import {
   SearchC as SearchCView,
   ReviewC as ReviewCView,
   DeliveryC as DeliveryCView,
+  CheckoutC as CheckoutCView,
   UserList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
@@ -37,15 +38,43 @@ const Routes = () => {
         path='/' 
         component={LoginView} 
       />
-      { userStore.accessRights == 2 &&
-        <RouteWithLayout
-          component={DashboardCView}
-          exact
-          layout={MainLayout}
-          path="/dashboard"
-        />
+       {/* Customer */}
+      { userStore.accessRights === 4 &&
+        <div>
+          <RouteWithLayout
+            component={DashboardCView}
+            exact
+            layout={MainLayout}
+            path="/dashboard"
+          />
+          <RouteWithLayout
+            component={ReviewCView}
+            exact
+            layout={MainLayout}
+            path="/reviews"
+          />
+          <RouteWithLayout
+            component={CheckoutCView}
+            exact
+            layout={MainLayout}
+            path="/checkout"
+          />
+          <RouteWithLayout
+            component={DeliveryCView}
+            exact
+            layout={MainLayout}
+            path="/latest_delivery"
+          />
+          <RouteWithLayout
+            component={SearchCView}
+            exact
+            layout={MainLayout}
+            path="/search"
+          />
+        </div>
       }
-      {userStore.accessRights == 1 &&
+      {/* Riders */}
+      {userStore.accessRights == 3 &&
         <RouteWithLayout
           component={DashboardRView}
           exact
@@ -59,24 +88,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/users"
       />
-      <RouteWithLayout
-        component={ReviewCView}
-        exact
-        layout={MainLayout}
-        path="/reviews"
-      />
-      <RouteWithLayout
-        component={DeliveryCView}
-        exact
-        layout={MainLayout}
-        path="/latest_delivery"
-      />
-      <RouteWithLayout
-        component={SearchCView}
-        exact
-        layout={MainLayout}
-        path="/search"
-      />
+     
       <RouteWithLayout
         component={ProductListView}
         exact

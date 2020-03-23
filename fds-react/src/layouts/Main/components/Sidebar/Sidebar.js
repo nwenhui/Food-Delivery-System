@@ -14,7 +14,7 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import SearchIcon from '@material-ui/icons/Search';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-
+import { userStore } from 'Store/UserStore';
 import { Profile, SidebarNav } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +45,38 @@ const Sidebar = props => {
 
   const classes = useStyles();
 
+  const pagesC = [
+    {
+      title: 'Dashboard',
+      href: '/dashboard',
+      icon: <DashboardIcon />
+    },
+    {
+      title: 'Search',
+      href: '/search',
+      icon: <SearchIcon/>
+    },
+    {
+      title: 'Reviews',
+      href: '/reviews',
+      icon: <RateReviewIcon/>
+    },
+    {
+      title: 'Latest Delivery',
+      href: '/latest_delivery',
+      icon: <HourglassEmptyIcon/>
+    },
+    {
+      title: 'Check Out',
+      href: '/checkout',
+      icon: <ShoppingBasketIcon/>
+    },
+    {
+      title: 'Account',
+      href: '/account',
+      icon: <AccountBoxIcon />
+    },
+  ];
   const pages = [
     {
       title: 'Dashboard',
@@ -65,6 +97,11 @@ const Sidebar = props => {
       title: 'Latest Delivery',
       href: '/latest_delivery',
       icon: <HourglassEmptyIcon/>
+    },
+    {
+      title: 'Check Out',
+      href: '/checkout',
+      icon: <ShoppingBasketIcon/>
     },
     {
       title: 'Users',
@@ -117,9 +154,10 @@ const Sidebar = props => {
       >
         <Profile />
         <Divider className={classes.divider} />
+        {console.log(userStore.accessRights)}
         <SidebarNav
           className={classes.nav}
-          pages={pages}
+          pages={(userStore.accessRights == 4) ? pagesC:pages}
         />
       </div>
     </Drawer>
