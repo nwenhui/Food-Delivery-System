@@ -41,7 +41,7 @@ const Sidebar = props => {
 
   const classes = useStyles();
 
-  const accessRights = 1; // query accessRights
+  const accessRights = 4; // query accessRights
 
   const customerPages = [
     {
