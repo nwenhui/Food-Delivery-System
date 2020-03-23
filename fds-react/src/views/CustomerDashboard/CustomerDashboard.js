@@ -25,45 +25,29 @@ const RiderSchedule = () => {
           item
           spacing={4}
         >
-        <Grid
-          item
-          lg={2}
-          sm={2}
-          xl={2}
-          xs={0}
-        >
-        </Grid>
           <Grid
             item
-            lg={5}
-            sm={5}
-            xl={5}
-            xs={6}
+            lg={6}
+            sm={6}
+            xl={6}
+            xs={12}
           >
             <TotalCustOrders />
           </Grid>
           <Grid
             item
-            lg={5}
-            sm={5}
-            xl={5}
-            xs={6}
+            lg={6}
+            sm={6}
+            xl={6}
+            xs={12}
           >
             <RewardPoints />
           </Grid>
           <Grid
             item
-            lg={2}
-            md={2}
-            xl={2}
-            xs={0}
-          >
-          </Grid>
-          <Grid
-            item
-            lg={10}
-            md={10}
-            xl={10}
+            lg={12}
+            md={12}
+            xl={12}
             xs={12}
           >
             <PastOrders />
