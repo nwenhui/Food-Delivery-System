@@ -8,6 +8,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SettingsIcon from '@material-ui/icons/Settings';
+import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+import WorkIcon from '@material-ui/icons/Work';
 
 import { Profile, SidebarNav } from './components';
 
@@ -39,7 +41,9 @@ const Sidebar = props => {
 
   const classes = useStyles();
 
-  const pages = [
+  const accessRights = 1; // query accessRights
+
+  const customerPages = [
     {
       title: 'Summary',
       href: '/customer_dashboard',
@@ -67,6 +71,60 @@ const Sidebar = props => {
     }
   ];
 
+  const managerPages = [
+    {
+      title: 'Summary',
+      href: '/manager_dashboard',
+      icon: <DashboardIcon />
+    },
+    {
+      title: 'Promotion',
+      href: '/manager_promotion',
+      icon: <CardGiftcardIcon />
+    }
+  ];
+
+  const riderPages = [
+    {
+      title: 'Summary',
+      href: '/rider_dashboard',
+      icon: <DashboardIcon />
+    },
+    {
+      title: 'Work Schedule',
+      href: '/rider_schedule',
+      icon: <WorkIcon />
+    },
+    {
+      title: 'Review',
+      href: '/rider_review',
+      icon: <RateReviewIcon />
+    }
+  ];
+
+  const staffPages = [
+    {
+      title: 'Summary',
+      href: '/staff_dashboard',
+      icon: <DashboardIcon />
+    },
+    {
+      title: 'Food Item',
+      href: '/staff_foodItem',
+      icon: <SearchIcon />
+    },
+    {
+      title: 'Promotion',
+      href: '/staff_promotion',
+      icon: <CardGiftcardIcon />
+    },
+    {
+      title: 'Reviews',
+      href: '/staff_review',
+      icon: <ShoppingCartIcon />
+    },
+  ];
+
   return (
     <Drawer
       anchor="left"
@@ -83,7 +141,11 @@ const Sidebar = props => {
         <Divider className={classes.divider} />
         <SidebarNav
           className={classes.nav}
-          pages={pages}
+          pages={
+            (accessRights == 1) ? managerPages :
+            (accessRights == 2) ? staffPages:
+            (accessRights == 3) ? riderPages:
+            customerPages }
         />
       </div>
     </Drawer>
