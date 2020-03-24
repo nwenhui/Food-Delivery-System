@@ -71,10 +71,9 @@ const RestaurantReview = props => {
                       title="Sort"
                     >
                       <TableSortLabel
-                        active
                         direction="desc"
                       >
-                        Date
+                        Restaurant
                       </TableSortLabel>
                     </Tooltip>
                   </TableCell>
@@ -85,14 +84,12 @@ const RestaurantReview = props => {
                       title="Sort"
                     >
                       <TableSortLabel
-                        active
                         direction="asc"
                       >
-                        Rating
+                        Review
                       </TableSortLabel>
                     </Tooltip>
                   </TableCell>
-                  <TableCell>Review</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -101,11 +98,17 @@ const RestaurantReview = props => {
                     hover
                     key={order.id}
                   >
-                    <TableCell>
-                      {moment(order.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
-                    <TableCell>{order.rating}</TableCell>
-                    <TableCell>{order.content}</TableCell>
+                    <TableCell>{ order.name }</TableCell>
+                      {order.feedbackList.map(feedback => (
+                        <TableRow key={order.name}>
+                          <div style={{}} >
+                            <div>{feedback.content}</div>
+                            <div style={{}}>Rating: {feedback.rating}/5</div>
+                            <div style={{ borderBottom:"1px solid #ced3db" }}>Posted On: {moment(feedback.date).format('DD/MM/YYYY')}</div>
+                          </div>
+                          
+                        </TableRow>
+                      ))}
                   </TableRow>
                 ))}
               </TableBody>
