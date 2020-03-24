@@ -1,5 +1,49 @@
 export default {
 
+	restaurantList: [
+		{
+			oid: 'CDD1049',
+			restaurant: {
+				name: 'Ekaterina Tankova'
+			},
+			category: [ 'a', 'b', 'c', 'd'],
+		},
+		{
+			oid: 'CDD1048',
+			restaurant: {
+				name: 'Cao Yu'
+			},
+			category: [ 'a', 'b', 'd'],
+		},
+		{
+			oid: 'CDD1047',
+			restaurant: {
+				name: 'Alexa Richardson'
+			},
+			category: [ 'a', 'b', 'c', 'd'],
+		},
+		{
+			oid: 'CDD1046',
+			restaurant: {
+				name: 'Anje Keizer'
+			},
+			category: ['c', 'd'],
+		},
+		{
+			oid: 'CDD1045',
+			restaurant: {
+				name: 'Clarke Gillebert'
+			},
+			category: [ 'a', 'b'],
+		},
+		{
+			oid: 'CDD1044',
+			restaurant: {
+				name: 'Adam Denisov'
+			},
+			category: [ 'a', 'b', 'c', 'd'],
+			}
+		],
 	foodItem: [
 		{
 			oid: 'CDD1049',

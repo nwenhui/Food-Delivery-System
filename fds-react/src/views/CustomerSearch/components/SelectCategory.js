@@ -18,11 +18,6 @@ const useStyles = makeStyles(theme => ({
 
 const SelectCategory = props => {
   const classes = useStyles();
-  const [category, setCategory] = React.useState('');
-
-  const handleChange = event => {
-    setCategory(event.target.value);
-  };
 
   return (
     <div>
@@ -31,15 +26,17 @@ const SelectCategory = props => {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={category}
-          onChange={handleChange}
+          value={props.value}
+          onChange={props.onChange}
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={'Halal'}>Halal</MenuItem>
-          <MenuItem value={'Seafood'}>Seafood</MenuItem>
-          <MenuItem value={'Meat'}>Meat</MenuItem>
+          {
+            props.items.map(item => {
+              return <MenuItem value={item.value} key={item.value}>{item.name}</MenuItem>
+            })
+          }
         </Select>
       </FormControl>
     </div>
