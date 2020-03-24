@@ -16,7 +16,6 @@ import {
   TableRow,
 } from '@material-ui/core';
 
-import data from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -44,7 +43,7 @@ const FoodItem = props => {
 
   const classes = useStyles();
 
-  const [orders] = useState(data.foodItem);
+  const [orders] = useState(props.data);
 
   return (
     <Card

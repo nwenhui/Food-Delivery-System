@@ -23,14 +23,12 @@ const AccountDetails = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    location: 'USA',
-    creditcard: ''
+    userName: 'Shen',
+    password: 'gfshdgdfah',
   });
+
+  const [creditcard, setCreditcard] = useState(["425543", "543321"]);
+  const [location, setLocation] = useState(["Jurong Street 10"]);
 
   const handleChange = event => {
     setValues({
@@ -40,33 +38,24 @@ const AccountDetails = props => {
   };
 
   const handleAddCreditCard = () => {
-    return(
-      <TextField
-        fullWidth
-        label="CreditCard"
-        margin="dense"
-        name="creditCard"
-        onChange={handleChange}
-        type="number"
-        value={values.creditcard}
-        variant="outlined"
-      />
-    )
+    setCreditcard(creditcard.concat("Add Credit Card"));
+  }
+
+  const handleCreditCardChange = (event, index) => {
+    creditcard[index] = event.target.value;
+    console.log(creditcard)
+    setCreditcard(creditcard)
+    console.log(typeof event.target.value)
+    console.log(index)
   }
 
   const handleAddLocation = () => {
-    return(
-      <TextField
-        fullWidth
-        label="CreditCard"
-        margin="dense"
-        name="creditCard"
-        onChange={handleChange}
-        type="number"
-        value={values.creditcard}
-        variant="outlined"
-      />
-    )
+    setLocation(location.concat("Add Location"));
+  }
+
+  const handleLocationChange = (event, index) => {
+    location[index] = event.target.value;
+    setLocation(location)
   }
 
   return (
@@ -86,7 +75,7 @@ const AccountDetails = props => {
         <CardContent>
           <Grid
             container
-            spacing={3}
+            spacing={1}
           >
             <Grid
               item
@@ -95,13 +84,13 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
+                helperText="Please specify the user name"
+                label="User Name"
                 margin="dense"
-                name="firstName"
+                name="userName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.userName}
                 variant="outlined"
               />
             </Grid>
@@ -112,12 +101,12 @@ const AccountDetails = props => {
             >
               <TextField
                 fullWidth
-                label="Last name"
+                label="Password"
                 margin="dense"
-                name="lastName"
+                name="password"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.password}
                 variant="outlined"
               />
             </Grid>
@@ -126,48 +115,25 @@ const AccountDetails = props => {
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Email Address"
-                margin="dense"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Phone Number"
-                margin="dense"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="CreditCard"
-                margin="dense"
-                name="creditCard"
-                onChange={handleChange}
-                type="number"
-                value={values.creditcard}
-                variant="outlined"
-              />
+              {creditcard.map((value, index) => {
+                return (
+                  <div key={index}>
+                    <TextField
+                      fullWidth
+                      label="CreditCard"
+                      margin="dense"
+                      name="creditCard"
+                      onChange={(e) => handleCreditCardChange(e, index)}
+                      type="number"
+                      value={value}
+                      variant="outlined"
+                    />
+                  </div>
+                  
+                );
+
+              })}
+             
               <Button onClick={handleAddCreditCard}>Add CreditCard</Button>
             </Grid>
             <Grid
@@ -175,16 +141,23 @@ const AccountDetails = props => {
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Location"
-                margin="dense"
-                name="location"
-                onChange={handleChange}
-                required
-                value={values.address}
-                variant="outlined"
-              />
+              {location.map((value,index) => {
+                return (
+                  <div key={index}>
+                    <TextField
+                    fullWidth
+                    label="Location"
+                    margin="dense"
+                    name="location"
+                    onChange={handleLocationChange}
+                    required
+                    value={value}
+                    variant="outlined"
+                  />
+                  </div>
+                );
+              })}
+             
               <Button onClick={handleAddLocation}>Add Location</Button>
             </Grid>
           </Grid>

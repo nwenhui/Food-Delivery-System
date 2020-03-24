@@ -51,7 +51,7 @@ const SignUp = (props) => {
 
       <div className="SignupForm">
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="username" bsSize="large">
+          <Form.Group controlId="username" bssize="large">
             <Form.Label>New User Name</Form.Label>
             <Form.Control
               autoFocus
@@ -61,7 +61,7 @@ const SignUp = (props) => {
               onChange={e => setUsername(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="password" bsSize="large">
+          <Form.Group controlId="password" bssize="large">
             <Form.Label>New Password</Form.Label>
             <Form.Control
               value={password}
@@ -80,7 +80,7 @@ const SignUp = (props) => {
       </div>
 
       <div className="Signup">
-        <Button variant="outline-secondary" block bsSize="large" onClick={handleSubmit}>
+        <Button variant="outline-secondary" block bssize="large" onClick={handleSubmit}>
           Sign Up Now
         </Button>
       </div>

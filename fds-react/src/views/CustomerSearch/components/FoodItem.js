@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -9,20 +8,15 @@ import {
   CardActions,
   CardHeader,
   CardContent,
-  Button,
   Divider,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  Tooltip,
-  TableSortLabel
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import data from './data';
-import { StatusBullet } from 'components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -58,7 +52,7 @@ const FoodItem = props => {
       className={clsx(classes.root, className)}
     >
       <CardHeader
-        title="Past Orders"
+        title="Food Items"
       />
       <Divider />
       <CardContent className={classes.content}>
@@ -67,11 +61,11 @@ const FoodItem = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell style={{valign:'top'}}>Order Ref</TableCell>
-                  <TableCell>Restaurant</TableCell>
+                  <TableCell style={{valign:'top'}}>Restaurant</TableCell>
                   <TableCell>Food Item</TableCell>
                   <TableCell>Original Price</TableCell>
                   <TableCell>Discounted Price</TableCell>
+                  <TableCell>Category</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -80,11 +74,11 @@ const FoodItem = props => {
                     hover
                     key={order.id}
                   >
-                    <TableCell>{order.oid}</TableCell>
-                    <TableCell>{order.restaurant.name}</TableCell>
-                    <TableCell><ol>{order.foodItem.map(item => <li>{item}</li>)}</ol></TableCell>
+                    <TableCell>{order.rname}</TableCell>
+                    <TableCell>{order.name}</TableCell>
                     <TableCell>{order.amount}</TableCell>
                     <TableCell>{order.discounted}</TableCell>
+                    <TableCell>{order.category.map(item => <li>{item}</li>)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

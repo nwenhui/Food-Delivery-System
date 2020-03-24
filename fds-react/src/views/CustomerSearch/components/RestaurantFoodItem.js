@@ -18,8 +18,6 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Tooltip,
-  TableSortLabel
 } from '@material-ui/core';
 
 import data from './data';
@@ -109,8 +107,7 @@ const RestaurantFoodItem = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell style={{valign:'top'}}>Order Ref</TableCell>
-                  <TableCell>Food Item</TableCell>
+                  <TableCell style={{valign:'top'}}>Food Item</TableCell>
                   <TableCell>Original Price</TableCell>
                   <TableCell>Discounted Price</TableCell>
                   <TableCell>Quantity</TableCell>
@@ -122,7 +119,6 @@ const RestaurantFoodItem = props => {
                     hover
                     key={order.id}
                   >
-                    <TableCell>{order.oid}</TableCell>
                     <TableCell>{order.name}</TableCell>
                     <TableCell>{order.amount}</TableCell>
                     <TableCell>{order.discounted}</TableCell>

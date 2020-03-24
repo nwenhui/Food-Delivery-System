@@ -7,6 +7,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import data from './components/data';
 
 import {
     FoodItem,
@@ -25,8 +26,15 @@ const CustomerCheckout = () => {
 	const [value, setValue] = React.useState('cash');
 
 	const handleChange = event => {
-		setValue(event.target.value);
-	};
+    setValue(event.target.value);
+  };
+  
+  const handleCheckout = () => {
+    if(value === "cash") console.log(true)
+    else console.log(false)
+  }
+
+  // SQL: pass table data from here because need oid for checkout
 
   return (
     <div className={classes.root}>
@@ -42,7 +50,7 @@ const CustomerCheckout = () => {
           xl={12}
           xs={12}
         >
-          <FoodItem />
+          <FoodItem data={data.foodItem}/>
         </Grid>
         <Grid
           item
@@ -61,7 +69,7 @@ const CustomerCheckout = () => {
 							<FormControlLabel value="creditCard" control={<Radio />} label="Credit Card" />
 						</RadioGroup>
 					</FormControl>
-					<Button style={{marginTop:"75px"}} color="primary" variant="contained">Check Out</Button>
+					<Button style={{marginTop:"75px"}} color="primary" variant="contained" onClick={handleCheckout}>Check Out</Button>
         </Grid>
         
       </Grid>

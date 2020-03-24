@@ -40,24 +40,34 @@ const CustomerSearch = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showRestaurantList, setShowRestaurantList] = useState(false);
   const [showRestaurantFoodItem, setShowRestaurantFoodItem] = useState(false);
+  const [showFoodItemList, setShowFoodItemList] = useState(false);
 
   const handleToggle = (event, value) => {
     if(value != null) setSearch(value);
   };
 
-  // trigger
+  // SQL: Pass search value to retrive restaurant food item
   const handleEnter = () => {
-    if (search) {
       console.log(searchValue)
       setShowRestaurantFoodItem(true);
       setShowRestaurantList(false);
-    }
-    else{
-      console.log(selectedCategory)
-      setShowRestaurantFoodItem(false);
-      setShowRestaurantList(true);
-    }
+      setShowFoodItemList(false);
+  }
 
+  // SQL: Pass selected value to retrive all food item of category
+  const handleListFood = () => {
+    console.log(selectedCategory)
+    setShowRestaurantFoodItem(false);
+    setShowRestaurantList(false);
+    setShowFoodItemList(true);
+  }
+
+  // SQL: Pass selected value to retrive all restaurant of category
+  const handleListRestaurant = () => {
+    console.log(selectedCategory)
+    setShowRestaurantFoodItem(false);
+    setShowRestaurantList(true);
+    setShowFoodItemList(false);
   }
 
   const handleSearchInput = (event) => {
@@ -89,8 +99,8 @@ const CustomerSearch = () => {
           Select Category
         </ToggleButton>
       </ToggleButtonGroup>
-      <Button onClick={handleEnter}>Enter</Button>
-      <div className={classes.row}>
+
+      <div className={classes.row} style={{marginBottom:"16px"}}>
         { search ? 
           <SearchInput
             className={classes.searchInput}
@@ -103,8 +113,12 @@ const CustomerSearch = () => {
             onChange={handleSelectCategory}
           />
         }
+        {search ? <Button variant="contained" color="primary" onClick={handleEnter}>Enter</Button> : "" }
+        {search ? "" : <Button style={{marginRight:"5px"}} variant="outlined" color="primary" onClick={handleListFood}>Food</Button> }
+        {search ? "" : <Button variant="outlined" color="primary" onClick={handleListRestaurant}>Restaurant</Button> }
       </div>
       {showRestaurantList ? <RestaurantList /> : ""}
+      {showFoodItemList ? <FoodItem /> : ""}
       {showRestaurantFoodItem ? <RestaurantFoodItem restaurantname={searchValue} /> : ""}
       {showRestaurantFoodItem ? <RestaurantReview /> : ""}
     </div>

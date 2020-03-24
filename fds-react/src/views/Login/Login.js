@@ -69,7 +69,7 @@ const Login = (props) => {
 
       <div className="SigninForm">
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="username" bsSize="large">
+          <Form.Group controlId="username" bssize="large">
             <Form.Label>User Name</Form.Label>
             <Form.Control
               autoFocus
@@ -79,7 +79,7 @@ const Login = (props) => {
               onChange={e => setUsername(e.target.value)}
             />
           </Form.Group>
-          <Form.Group controlId="password" bsSize="large">
+          <Form.Group controlId="password" bssize="large">
             <Form.Label>Password</Form.Label>
             <Form.Control
               value={password}
@@ -94,7 +94,7 @@ const Login = (props) => {
               {dropdown}
             </Form.Control>
           </Form.Group>
-          <Button variant="outline-primary" block bsSize="large" disabled={!validateForm()} type="submit">
+          <Button variant="outline-primary" block bssize="large" disabled={!validateForm()} type="submit">
             Login
           </Button>
         </Form>
@@ -102,7 +102,7 @@ const Login = (props) => {
 
       <div className="Signup">
         <p>Are you a newcomer?</p>
-        <Button variant="outline-secondary" block bsSize="large" onClick={handleSignUp}>
+        <Button variant="outline-secondary" block bssize="large" onClick={handleSignUp}>
           Sign Up
         </Button>
       </div>

@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+// SQL: get reward points
 const RewardPoints = props => {
   const { className, ...rest } = props;
 

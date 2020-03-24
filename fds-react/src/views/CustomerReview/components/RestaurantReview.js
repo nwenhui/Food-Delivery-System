@@ -9,7 +9,6 @@ import {
   CardActions,
   CardHeader,
   CardContent,
-  Button,
   Divider,
   Table,
   TableBody,
@@ -99,16 +98,15 @@ const RestaurantReview = props => {
                     key={order.id}
                   >
                     <TableCell>{ order.name }</TableCell>
+                    <TableCell>
                       {order.feedbackList.map(feedback => (
-                        <TableRow key={order.name}>
-                          <div style={{}} >
+                          <div style={{display:"flex", justifyContent:"space-between", width:"700px", borderBottom:"1px solid #ced3db" }} >
                             <div>{feedback.content}</div>
                             <div style={{}}>Rating: {feedback.rating}/5</div>
-                            <div style={{ borderBottom:"1px solid #ced3db" }}>Posted On: {moment(feedback.date).format('DD/MM/YYYY')}</div>
+                            <div style={{}}>Posted On: {moment(feedback.date).format('DD/MM/YYYY')}</div>
                           </div>
-                          
-                        </TableRow>
                       ))}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

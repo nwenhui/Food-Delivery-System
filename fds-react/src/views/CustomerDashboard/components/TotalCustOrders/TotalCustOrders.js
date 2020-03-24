@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   }
 }));
-
+// SQL: Get Total number of Orders
 const TotalCustOrders = props => {
   const { className, ...rest } = props;
 
