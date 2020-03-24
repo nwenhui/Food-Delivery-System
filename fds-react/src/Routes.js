@@ -16,6 +16,7 @@ import {
   CustomerCheckout as CustomerCheckoutView,
   CustomerSearch as CustomerSearchView,
   CustomerReview as CustomerReviewView,
+  CustomerSettings as CustomerSettingsView,
   Dashboard as DashboardView,
   RiderDashboard as RiderDashboardView,
   RiderSchedule as RiderScheduleView,
@@ -92,6 +93,12 @@ const Routes = () => {
         exact
         layout={CustomerLayout}
         path="/customer_search"
+      />
+      <RouteWithLayout
+        component={CustomerSettingsView}
+        exact
+        layout={CustomerLayout}
+        path="/customer_settings"
       />
       <RouteWithLayout
         component={CustomerReviewView}
