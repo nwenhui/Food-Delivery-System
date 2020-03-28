@@ -21,6 +21,7 @@ import {
   RiderDashboard as RiderDashboardView,
   RiderSchedule as RiderScheduleView,
   ManagerDashboard as ManagerDashboardView,
+  ManagerPromotion as ManagerPromotionView,
   StaffDashboard as StaffDashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
@@ -57,6 +58,12 @@ const Routes = () => {
         exact
         layout={ManagerLayout}
         path="/manager_dashboard"
+      />
+      <RouteWithLayout
+        component={ManagerPromotionView}
+        exact
+        layout={ManagerLayout}
+        path="/manager_promo"
       />
       <RouteWithLayout
         component={StaffDashboardView}

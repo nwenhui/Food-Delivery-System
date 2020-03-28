@@ -36,7 +36,6 @@ const ManagerDashboard = () => {
   const [showSales, setShowSales] = useState(false);
 
 
-
   const handleSelectChange = (e) => {
     setSelectedCategory(e.target.value)
     console.log(e.target.value)

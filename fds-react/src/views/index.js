@@ -10,6 +10,7 @@ export { default as CustomerSearch } from './CustomerSearch';
 export { default as CustomerReview } from './CustomerReview';
 export { default as CustomerSettings } from './CustomerSettings';
 export { default as ManagerDashboard } from './ManagerDashboard';
+export { default as ManagerPromotion } from './ManagerPromotion';
 export { default as RiderDashboard } from './RiderDashboard';
 export { default as RiderSchedule } from './RiderSchedule';
 export { default as StaffDashboard } from './StaffDashboard';
