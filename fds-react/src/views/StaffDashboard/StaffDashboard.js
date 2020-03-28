@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Grid, Button } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import DateFnsUtils from '@date-io/date-fns';
+import { Grid } from '@material-ui/core';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-
+import { FormControl, InputLabel, Input, MenuItem, Select, TextField, Button } from '@material-ui/core';
+import moment from 'moment';
 
 import {
-  RestaurantData
+  AvgOrders,
+  NumOrders,
+  TopFive,
+  TotalProfit
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -24,9 +23,17 @@ const useStyles = makeStyles(theme => ({
 
 const StaffDashboard = () => {
   const classes = useStyles();
-  const [summary, setSummary] = useState('');
-  const [selectedCategory, handleCategoryChange] = useState('');
-  const [selectedDate, handleDateChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showData, setShowData] = useState(false);
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e);
+  }
+
+  const handleEnterBtton = () => {
+    console.log(moment(selectedDate).month())
+    setShowData(true);
+  }
 
   return (
     <div className={classes.root}>
@@ -36,43 +43,79 @@ const StaffDashboard = () => {
           item
           spacing={4}
         >
-        <Grid
-          item
-          lg={2}
-          sm={2}
-          xl={2}
-          xs={0}
-        >
-        </Grid>
           <Grid
             item
-            lg={10}
-            sm={10}
-            xl={10}
+            lg={12}
+            sm={12}
+            xl={12}
             xs={12}
           >
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker value={selectedDate} onChange={handleDateChange} />
-            </MuiPickersUtilsProvider>
+          <FormControl>
+          <TextField
+            label="Select Month"
+            type="date"
+            defaultValue="2017-05-24"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleDateChange}
+          />
+          </FormControl>
+          <Button
+            color="primary"
+            size="small"
+            variant="contained"
+            onClick={handleEnterBtton}
+          >
+            Enter
+          </Button>
           </Grid>
+          { showData &&
+            <Grid
+              item
+              lg={4}
+              md={4}
+              xl={4}
+              xs={12}
+            >
+              <AvgOrders data={32}/>
+            </Grid>
+          }
+          { showData && 
+            <Grid
+              item
+              lg={4}
+              sm={4}
+              xl={4}
+              xs={12}
+            >
+              <NumOrders data={20} />
+            </Grid>
+          }
+          { showData && 
+            <Grid
+              item
+              lg={4}
+              sm={4}
+              xl={4}
+              xs={12}
+            >
+              <TotalProfit data={20} />
+            </Grid>
+          }
+          { showData && 
+            <Grid
+              item
+              lg={4}
+              sm={4}
+              xl={4}
+              xs={12}
+            >
+              <TopFive data={["Chicken Rice", "Pudding", "Apple", "Pear", "Watermelon"]} />
+            </Grid>
+          }
 
-          <Grid
-            item
-            lg={2}
-            md={2}
-            xl={2}
-            xs={0}
-          >
-          </Grid>
-          <Grid
-            item
-            lg={10}
-            md={10}
-            xl={10}
-            xs={12}
-          >
-            <RestaurantData />
-          </Grid>
         </Grid>
 
     </div>
