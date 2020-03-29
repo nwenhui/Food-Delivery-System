@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { FormControl, InputLabel, Input, MenuItem, Select, TextField, Button } from '@material-ui/core';
+import { FormControl, InputLabel, Input, TextField, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -48,6 +48,8 @@ const AddPromo = props => {
   const handleEndDate = (e) => {
     setEndDate(e.target.value)
   }
+
+  // QUERY: INSERT (discount, minAmt, startDate, endDate)
   const handleEnterButton = () => {
 		console.log(discount)
 		console.log(minAmt)

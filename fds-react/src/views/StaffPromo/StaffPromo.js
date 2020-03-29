@@ -25,6 +25,8 @@ const StaffPromo = () => {
     setOpenDiv(!openDiv);
   }
 
+  // QUERY: fis, name, original, discounted, dailyLimit, categories[]
+
   return (
     <div className={classes.root}>
 

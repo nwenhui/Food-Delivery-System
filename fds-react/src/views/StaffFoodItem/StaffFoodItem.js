@@ -5,7 +5,8 @@ import { Grid, Button } from '@material-ui/core';
 import {
 	AddNew,
 	data,
-	FoodItem
+  FoodItem,
+  EditItem
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +59,7 @@ const StaffFoodItem = () => {
           xl={12}
           xs={12}
         >
-          <FoodItem data={data} />
+          <FoodItem data={data}/>
         </Grid>
 			</Grid>
     </div>

@@ -24,20 +24,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddNew = props => {
-  const { className, ...rest } = props;
-
+const EditItem = props => {
+  const { className, data, ...rest } = props;
   const classes = useStyles();
 
-  const [selectedCategory, setSelectedCategory] = useState('Selec Categories');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [dailyLimit, setDailyLimit] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(data.categories);
+  const [name, setName] = useState(data.name);
+  const [price, setPrice] = useState(data.original);
+  const [dailyLimit, setDailyLimit] = useState(data.dailyLimit);
 
+	console.log(name)
   const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
+    { value: 'Seafood', label: 'Seafood' },
+    { value: 'Western', label: 'Western' },
+    { value: 'Chicken', label: 'Chicken' },
+    { value: 'Japanese', label: 'Japanese' },
+    { value: 'Spicy', label: 'Spicy' },
   ];
 
   const handleSelectChange = selectedOption => {
@@ -62,9 +64,9 @@ const AddNew = props => {
     console.log(name)
 		console.log(price)
 		console.log(dailyLimit)
+		console.log(props.data.fid)
     props.onClick();
   }
-
 
   return (
     <div 
@@ -80,7 +82,9 @@ const AddNew = props => {
         width: "300px"
       }}
     >
-      <text>Select Categories</text>
+			<div style={{marginBottom:"5px"}}>Edit FoodItem: {props.data.fid}</div>
+
+      <div>Select Categories</div>
 
       <Select
         value={selectedCategory}
@@ -89,20 +93,19 @@ const AddNew = props => {
         isMulti
       />
 
-
       <FormControl>
 				<InputLabel htmlFor="my-input">Name</InputLabel>
-				<Input id="my-input" aria-describedby="my-helper-text" onChange={handleName}/>
+				<Input aria-describedby="my-helper-text" onChange={handleName} defaultValue={name}/>
       </FormControl>
       
 			<FormControl>
 				<InputLabel htmlFor="my-input">Price</InputLabel>
-				<Input id="my-input" aria-describedby="my-helper-text" onChange={handlePrice} />
+				<Input aria-describedby="my-helper-text" onChange={handlePrice} defauleValue={price}/>
 			</FormControl>
 
 			<FormControl>
 				<InputLabel htmlFor="my-input">Daily Limit</InputLabel>
-				<Input id="my-input" aria-describedby="my-helper-text" onChange={handleDailyLimit} />
+				<Input aria-describedby="my-helper-text" onChange={handleDailyLimit} defaultValue={dailyLimit}/>
 			</FormControl>
       <Button
         color="primary"
@@ -116,8 +119,8 @@ const AddNew = props => {
   );
 };
 
-AddNew.propTypes = {
+EditItem.propTypes = {
   className: PropTypes.string
 };
 
-export default AddNew;
+export default EditItem;

@@ -35,6 +35,8 @@ const StaffDashboard = () => {
     setShowData(true);
   }
 
+  // QUERY: month => AvgOrders, NumOrders, TotalProfit, TopFive[]
+
   return (
     <div className={classes.root}>
 

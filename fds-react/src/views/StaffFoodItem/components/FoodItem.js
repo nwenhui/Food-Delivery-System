@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import EditIcon from '@material-ui/icons/Edit';
 import {
   Card,
   CardHeader,
@@ -14,6 +15,7 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
+import EditItem from './EditItem';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -41,6 +43,18 @@ const FoodItem = props => {
   const classes = useStyles();
 
   const [orders] = useState(props.data);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [editData, setEditData] = useState("");
+
+  const handleClick = (orders) => {
+    console.log(orders)
+    setEditData(orders)
+    setOpenEdit(true)
+  }
+
+  const handleEdit = () => {
+    setOpenEdit(!openEdit);
+  }
 
   return (
     <Card
@@ -48,7 +62,7 @@ const FoodItem = props => {
       className={clsx(classes.root, className)}
     >
       <CardHeader
-        title="Current Promotion"
+        title="Food Items"
       />
       <Divider />
       <CardContent className={classes.content}>
@@ -63,6 +77,7 @@ const FoodItem = props => {
                   <TableCell>Discounted Price</TableCell>
                   <TableCell>Daily Limit</TableCell>
                   <TableCell>Categories</TableCell>
+                  <TableCell>Edit</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -81,12 +96,14 @@ const FoodItem = props => {
 												return <li>{category}</li>
 											})}
 										</TableCell>
+                    <TableCell><EditIcon onClick={() => handleClick(order)}/></TableCell>
                     
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
+          {openEdit && <EditItem data={editData} onClick={handleEdit}/> }
         </PerfectScrollbar>
       </CardContent>
       <Divider />
