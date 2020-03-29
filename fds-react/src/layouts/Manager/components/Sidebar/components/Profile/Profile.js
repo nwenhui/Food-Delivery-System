@@ -23,13 +23,31 @@ const useStyles = makeStyles(theme => ({
 
 const Profile = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
 
+  /**** Fetch the profile for the current user
+
+  const url = 'api/v1/...';
+  let profile;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    profile = JSON.parse(result);
+  })
+  .catch((error) => {
+    // cannot fetch the profile data
+    console.log('Error: ', error);
+  });
+
+  ****/
+
   const user = {
+    // name: profile.username;
+    // bio: profile.usertype;
     name: 'Shen Zhi',
-    avatar: '/images/avatars/avatar_11.png',
-    bio: 'Brain Director'
+    avatar: '/images/avatars/Avatar.png',
+    bio: 'FDS Manager'
   };
 
   return (
