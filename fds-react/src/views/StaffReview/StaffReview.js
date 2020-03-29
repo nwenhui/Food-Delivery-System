@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
 const StaffReview = () => {
   const classes = useStyles();
 
+  // QUERY: Restaurant Reviews
+  // QUERY: return date, rating, comments
+
   return (
     <div className={classes.root}>
 

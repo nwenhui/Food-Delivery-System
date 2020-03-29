@@ -25,6 +25,7 @@ const StaffPromo = () => {
     setOpenDiv(!openDiv);
   }
 
+  // List all promotion
   // QUERY: fis, name, original, discounted, dailyLimit, categories[]
 
   return (

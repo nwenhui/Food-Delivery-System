@@ -58,7 +58,7 @@ const EditItem = props => {
   }
   
 
-  // QUERY: Insert(Categories[], name, price, dailylimit) 
+  // QUERY: UPDATE (Categories[], name, price, dailylimit) 
   const handleEnterButton = () => {
     console.log(selectedCategory)
     console.log(name)

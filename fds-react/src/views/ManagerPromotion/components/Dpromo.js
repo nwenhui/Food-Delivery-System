@@ -3,6 +3,9 @@ import clsx from 'clsx';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditDpromo from './EditDpromo';
 import {
   Card,
   CardHeader,
@@ -41,6 +44,22 @@ const Dpromo = props => {
   const classes = useStyles();
 
   const [orders] = useState(props.data);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [editData, setEditData] = useState("");
+
+  const handleClick = (orders) => {
+    setEditData(orders)
+    setOpenEdit(true)
+  }
+
+  const handleEdit = () => {
+    setOpenEdit(!openEdit);
+  }
+
+  // QUERY: DELETE
+  const handleDelete = (fid) => {
+    console.log(fid)
+  }
 
   return (
     <Card
@@ -62,6 +81,8 @@ const Dpromo = props => {
                   <TableCell>Minimum Number of Orders</TableCell>
                   <TableCell>Start Date</TableCell>
                   <TableCell>End Date</TableCell>
+                  <TableCell>Edit</TableCell>
+                  <TableCell>Delete</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -75,11 +96,14 @@ const Dpromo = props => {
                     <TableCell>{order.minOrders}</TableCell>
                     <TableCell>{order.startDate}</TableCell>
                     <TableCell>{order.endDate}</TableCell>
+                    <TableCell><EditIcon onClick={() => handleClick(order)}/></TableCell>
+                    <TableCell><DeleteIcon onClick={() => handleDelete(order.promo_id)}/></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
+          {openEdit && <EditDpromo data={editData} onClick={handleEdit}/> }
         </PerfectScrollbar>
       </CardContent>
       <Divider />

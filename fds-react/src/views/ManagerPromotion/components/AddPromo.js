@@ -58,6 +58,8 @@ const AddPromo = props => {
   const handleEndDate = (e) => {
     setEndDate(e.target.value)
   }
+
+  // QUERY: INSERT data
   const handleEnterButton = () => {
     switch(selectedCategory) {
       case "customer":

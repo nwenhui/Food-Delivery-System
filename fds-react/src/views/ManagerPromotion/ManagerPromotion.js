@@ -26,6 +26,8 @@ const ManagerPromotion = () => {
     setOpenDiv(!openDiv);
   }
 
+  // QUERY DATA for Customer promo list and delivery promo list
+
   return (
     <div className={classes.root}>
 

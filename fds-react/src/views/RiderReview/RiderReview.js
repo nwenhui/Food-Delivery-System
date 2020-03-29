@@ -19,6 +19,8 @@ const useStyles = makeStyles(theme => ({
 const RiderReview = () => {
   const classes = useStyles();
 
+  // Query data
+
   return (
     <div className={classes.root}>
 

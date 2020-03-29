@@ -18,6 +18,8 @@ const useStyles = makeStyles(theme => ({
 const RiderDashboard = () => {
   const classes = useStyles();
 
+  // Query for data
+
   return (
     <div className={classes.root}>
 
@@ -33,7 +35,7 @@ const RiderDashboard = () => {
             xl={4}
             xs={12}
           >
-            <TotalOrders />
+            <TotalOrders/>
           </Grid>
           <Grid
             item
