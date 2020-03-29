@@ -74,12 +74,12 @@ const Routes = () => {
         layout={StaffLayout}
         path="/staff_dashboard"
       />
-      {/* <RouteWithLayout
+      <RouteWithLayout
         component={StaffFoodItemView}
         exact
         layout={StaffLayout}
         path="/staff_items"
-      /> */}
+      />
       <RouteWithLayout
         component={StaffPromoView}
         exact
