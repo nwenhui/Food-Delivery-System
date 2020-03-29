@@ -50,6 +50,11 @@ const Routes = () => {
         path='/'
         component={LoginView}
       />
+      <Redirect
+        exact
+        from='/logout'
+        to='/'
+      />
       <RouteWithLayout
         component={SignUpView}
         exact

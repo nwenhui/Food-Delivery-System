@@ -6,6 +6,7 @@ import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import FeedbackIcon from '@material-ui/icons/Feedback';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Profile, SidebarNav } from './components';
 
@@ -52,6 +53,11 @@ const Sidebar = props => {
       title: 'Reviews',
       href: '/rider_review',
       icon: <FeedbackIcon />
+    },
+    {
+      title: 'Logout',
+      href: '/logout',
+      icon: <ExitToAppIcon />
     },
   ];
 

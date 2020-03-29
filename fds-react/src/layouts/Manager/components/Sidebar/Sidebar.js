@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Profile, SidebarNav } from './components';
 
@@ -46,7 +47,12 @@ const Sidebar = props => {
       title: 'Promotion',
       href: '/manager_promo',
       icon: <LoyaltyIcon />
-    }
+    },
+    {
+      title: 'Logout',
+      href: '/logout',
+      icon: <ExitToAppIcon />
+    },
   ];
 
   return (

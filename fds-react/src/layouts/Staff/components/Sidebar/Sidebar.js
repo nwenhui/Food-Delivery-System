@@ -7,6 +7,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import FeedbackIcon from '@material-ui/icons/Feedback';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Profile, SidebarNav } from './components';
 
@@ -58,6 +59,11 @@ const Sidebar = props => {
       title: 'Reviews',
       href: '/staff_review',
       icon: <FeedbackIcon />
+    },
+    {
+      title: 'Logout',
+      href: '/logout',
+      icon: <ExitToAppIcon />
     },
   ];
 

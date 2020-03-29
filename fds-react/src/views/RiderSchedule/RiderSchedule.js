@@ -80,9 +80,9 @@ const RiderSchedule = () => {
             xs={12}
           >
             <PastScheduleList />
-            /** REPLACE TO BELOW WHEN BACKEND IS CONNECTED **/
-            
-            /* <PastScheduleList schedules=scheduleData /> */
+            {/** REPLACE TO BELOW WHEN BACKEND IS CONNECTED **/}
+
+            {/* <PastScheduleList schedules={scheduleData} /> */}
           </Grid>
         }
 

@@ -92,7 +92,7 @@ const PastScheduleList = props => {
                 {schedules.map(schedule => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={schedule.id}
                   >
                     <TableCell>{schedule.ref}</TableCell>
                     <TableCell>{schedule.start}</TableCell>

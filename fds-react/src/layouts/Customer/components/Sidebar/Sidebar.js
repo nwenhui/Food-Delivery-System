@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Profile, SidebarNav } from './components';
 
@@ -64,7 +65,12 @@ const Sidebar = props => {
       title: 'Settings',
       href: '/customer_settings',
       icon: <SettingsIcon />
-    }
+    },
+    {
+      title: 'Logout',
+      href: '/logout',
+      icon: <ExitToAppIcon />
+    },
   ];
 
   return (
