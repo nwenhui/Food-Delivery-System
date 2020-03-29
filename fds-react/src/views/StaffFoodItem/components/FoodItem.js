@@ -4,6 +4,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import {
   Card,
   CardHeader,
@@ -47,13 +48,17 @@ const FoodItem = props => {
   const [editData, setEditData] = useState("");
 
   const handleClick = (orders) => {
-    console.log(orders)
     setEditData(orders)
     setOpenEdit(true)
   }
 
   const handleEdit = () => {
     setOpenEdit(!openEdit);
+  }
+
+  // QUERY: DELETE
+  const handleDelete = (fid) => {
+    console.log(fid)
   }
 
   return (
@@ -78,6 +83,7 @@ const FoodItem = props => {
                   <TableCell>Daily Limit</TableCell>
                   <TableCell>Categories</TableCell>
                   <TableCell>Edit</TableCell>
+                  <TableCell>Delete</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -97,6 +103,7 @@ const FoodItem = props => {
 											})}
 										</TableCell>
                     <TableCell><EditIcon onClick={() => handleClick(order)}/></TableCell>
+                    <TableCell><DeleteIcon onClick={() => handleDelete(order.fid)}/></TableCell>
                     
                   </TableRow>
                 ))}
