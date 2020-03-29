@@ -82,7 +82,7 @@ const EditItem = props => {
         width: "300px"
       }}
     >
-			<div style={{marginBottom:"5px"}}>Edit FoodItem: {props.data.fid}</div>
+			<div style={{marginBottom:"5px"}}>Edit Food Item: {props.data.fid}</div>
 
       <div>Select Categories</div>
 
