@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 
 import { Profile, SidebarNav } from './components';
 
@@ -46,7 +48,17 @@ const Sidebar = props => {
       title: 'Food Items',
       href: '/staff_items',
       icon: <FastfoodIcon />
-    }
+    },
+    {
+      title: 'Promotion',
+      href: '/staff_promo',
+      icon: <LoyaltyIcon />
+    },
+    {
+      title: 'Reviews',
+      href: '/staff_review',
+      icon: <FeedbackIcon />
+    },
   ];
 
   return (

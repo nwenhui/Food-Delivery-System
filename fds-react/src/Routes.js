@@ -23,6 +23,9 @@ import {
   ManagerDashboard as ManagerDashboardView,
   ManagerPromotion as ManagerPromotionView,
   StaffDashboard as StaffDashboardView,
+  StaffFoodItem as StaffFoodItemView,
+  StaffPromo as StaffPromoView,
+  StaffReview as StaffReviewView,
   ProductList as ProductListView,
   UserList as UserListView,
   Typography as TypographyView,
@@ -70,6 +73,24 @@ const Routes = () => {
         exact
         layout={StaffLayout}
         path="/staff_dashboard"
+      />
+      {/* <RouteWithLayout
+        component={StaffFoodItemView}
+        exact
+        layout={StaffLayout}
+        path="/staff_items"
+      /> */}
+      <RouteWithLayout
+        component={StaffPromoView}
+        exact
+        layout={StaffLayout}
+        path="/staff_promo"
+      />
+      <RouteWithLayout
+        component={StaffReviewView}
+        exact
+        layout={StaffLayout}
+        path="/staff_review"
       />
       <RouteWithLayout
         component={RiderDashboardView}

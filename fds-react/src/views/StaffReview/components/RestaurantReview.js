@@ -1,28 +1,19 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
-  CardActions,
   CardHeader,
   CardContent,
-  Button,
   Divider,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  Tooltip,
-  TableSortLabel
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-
-import mockData from './data';
-import { StatusBullet } from 'components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -44,18 +35,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const statusColors = {
-  delivered: 'success',
-  pending: 'info',
-  refunded: 'danger'
-};
-
-const RestaurantData = props => {
+const RestaurantReview = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
 
-  const [orders] = useState(mockData);
+  const [orders] = useState(props.data);
 
   return (
     <Card
@@ -63,7 +48,7 @@ const RestaurantData = props => {
       className={clsx(classes.root, className)}
     >
       <CardHeader
-        title="Restaurant Summary"
+        title="Reviews"
       />
       <Divider />
       <CardContent className={classes.content}>
@@ -72,10 +57,9 @@ const RestaurantData = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Total Number of Orders</TableCell>
-                  <TableCell>Average Orders per Day</TableCell>
-                  <TableCell>Total Profit</TableCell>
-                  <TableCell>Top 5 Food Items</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Rating</TableCell>
+                  <TableCell>Comments</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -84,10 +68,9 @@ const RestaurantData = props => {
                     hover
                     key={order.id}
                   >
-                    <TableCell>{order.numOrders}</TableCell>
-                    <TableCell>{order.avgOrders}</TableCell>
-                    <TableCell>{order.profit}</TableCell>
-                    <TableCell>{order.topFive.join(", ")}</TableCell>
+                    <TableCell>{order.date}</TableCell>
+                    <TableCell>{order.rating}/5</TableCell>
+                    <TableCell>{order.comments}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -96,21 +79,12 @@ const RestaurantData = props => {
         </PerfectScrollbar>
       </CardContent>
       <Divider />
-      <CardActions className={classes.actions}>
-        <Button
-          color="primary"
-          size="small"
-          variant="text"
-        >
-          View all <ArrowRightIcon />
-        </Button>
-      </CardActions>
     </Card>
   );
 };
 
-RestaurantData.propTypes = {
+RestaurantReview.propTypes = {
   className: PropTypes.string
 };
 
-export default RestaurantData;
+export default RestaurantReview;
