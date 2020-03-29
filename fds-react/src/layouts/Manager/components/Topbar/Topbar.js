@@ -33,7 +33,7 @@ const Topbar = props => {
       className={clsx(classes.root, className)}
     >
       <Toolbar>
-        <RouterLink to="/customer_dashboard">
+        <RouterLink to="/manager_dashboard">
           <img
             alt="Logo"
             src="/images/logos/fds--manager.svg"
