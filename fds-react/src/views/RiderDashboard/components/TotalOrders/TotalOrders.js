@@ -42,8 +42,23 @@ const useStyles = makeStyles(theme => ({
 
 const TotalOrders = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+
+  let totalOrder = 1200;
+
+  /**** Fetch the total order for the driver
+
+  const url = 'api/v1/...';
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    totalOrder = result;
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -64,7 +79,7 @@ const TotalOrders = props => {
             >
               TOTAL ORDERS
             </Typography>
-            <Typography variant="h3">1200</Typography>
+            <Typography variant="h3">{totalOrder}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

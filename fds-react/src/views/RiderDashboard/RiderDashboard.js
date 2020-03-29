@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
@@ -15,10 +16,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RiderDashboard = () => {
+const RiderDashboard = (props) => {
   const classes = useStyles();
-
-  // Query for data
 
   return (
     <div className={classes.root}>

@@ -41,8 +41,22 @@ const useStyles = makeStyles(theme => ({
 
 const Salary = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+
+  let salary = 5000;
+  /**** Fetch the salary for the driver
+
+  const url = 'api/v1/...';
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    salary = result;
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -63,7 +77,7 @@ const Salary = props => {
             >
               SALARY
             </Typography>
-            <Typography variant="h3">$5000</Typography>
+            <Typography variant="h3">${salary}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

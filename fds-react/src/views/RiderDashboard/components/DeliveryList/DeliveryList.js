@@ -50,10 +50,24 @@ const statusColors = {
 
 const DeliveryList = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
-
   const [orders] = useState(mockData);
+
+  /**** Fetch the orders for the driver
+
+  let orders;
+  const url = 'api/v1/...';
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    orders = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card

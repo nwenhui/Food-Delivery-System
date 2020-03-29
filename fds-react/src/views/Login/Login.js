@@ -19,8 +19,6 @@ const Login = (props) => {
   );
 
   function validateForm() {
-    // TODO:
-    // Insert SQL query to validate existence.
     return username.length > 0 && password.length > 0;
   }
 
@@ -34,9 +32,28 @@ const Login = (props) => {
     console.log("username: " + username);
     console.log("password: " + password);
     console.log("usertype: " + usertype);
-    // TODO:
-    // send the above data to the backend as input for SQL query.
-    // HTTP request
+
+    /**** Upload the login data to the backend ****
+
+    const data = {username: username, password: password, usertype: usertype};
+    const url = 'api/v1/...';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then(() => {
+      console.log('Success!');
+    })
+    .catch((error) => {
+      // handle the error if user does not exist
+      console.log('Error: ', error);
+    });
+
+    ****/
 
     // convert string to number
     var user_type = Number(usertype);

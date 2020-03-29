@@ -41,8 +41,23 @@ const useStyles = makeStyles(theme => ({
 
 const TotalHours = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+
+  let totalHours = 440;
+
+  /**** Fetch the total hours for the driver
+
+  const url = 'api/v1/...';
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    totalHours = result;
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -63,7 +78,7 @@ const TotalHours = props => {
             >
               TOTAL HOURS
             </Typography>
-            <Typography variant="h3">440</Typography>
+            <Typography variant="h3">{totalHours}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
