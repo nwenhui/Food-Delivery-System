@@ -13,6 +13,7 @@ export { default as ManagerDashboard } from './ManagerDashboard';
 export { default as ManagerPromotion } from './ManagerPromotion';
 export { default as RiderDashboard } from './RiderDashboard';
 export { default as RiderSchedule } from './RiderSchedule';
+export { default as RiderReview } from './RiderReview';
 export { default as StaffDashboard } from './StaffDashboard';
 export { default as StaffFoodItem } from './StaffFoodItem';
 export { default as StaffReview } from './StaffReview';

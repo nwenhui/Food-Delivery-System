@@ -26,54 +26,38 @@ const RiderDashboard = () => {
           item
           spacing={4}
         >
-        <Grid
-          item
-          lg={3}
-          sm={3}
-          xl={3}
-          xs={0}
-        >
-        </Grid>
           <Grid
             item
-            lg={3}
-            sm={3}
-            xl={3}
+            lg={4}
+            sm={4}
+            xl={4}
             xs={12}
           >
             <TotalOrders />
           </Grid>
           <Grid
             item
-            lg={3}
-            sm={3}
-            xl={3}
+            lg={4}
+            sm={4}
+            xl={4}
             xs={12}
           >
             <TotalHours />
           </Grid>
           <Grid
             item
-            lg={3}
-            sm={3}
-            xl={3}
+            lg={4}
+            sm={4}
+            xl={4}
             xs={12}
           >
             <Salary />
           </Grid>
           <Grid
             item
-            lg={3}
-            md={3}
-            xl={3}
-            xs={0}
-          >
-          </Grid>
-          <Grid
-            item
-            lg={9}
-            md={9}
-            xl={9}
+            lg={12}
+            md={12}
+            xl={12}
             xs={12}
           >
             <DeliveryList />

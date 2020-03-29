@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -14,11 +13,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Tooltip,
-  TableSortLabel
 } from '@material-ui/core';
-
-import mockData from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -40,18 +35,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const statusColors = {
-  delivered: 'success',
-  pending: 'info',
-  refunded: 'danger'
-};
-
-const PastScheduleList = props => {
+const ReviewList = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
 
-  const [orders] = useState(mockData);
+  const [orders] = useState(props.data);
 
   return (
     <Card
@@ -59,7 +48,7 @@ const PastScheduleList = props => {
       className={clsx(classes.root, className)}
     >
       <CardHeader
-        title="Past Work Schedule"
+        title="Reviews"
       />
       <Divider />
       <CardContent className={classes.content}>
@@ -68,22 +57,9 @@ const PastScheduleList = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Schedule Ref</TableCell>
-                  <TableCell>Start Time</TableCell>
-                  <TableCell>End Time</TableCell>
-                  <TableCell sortDirection="desc">
-                    <Tooltip
-                      enterDelay={300}
-                      title="Sort"
-                    >
-                      <TableSortLabel
-                        active
-                        direction="desc"
-                      >
-                        Date
-                      </TableSortLabel>
-                    </Tooltip>
-                  </TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Rating</TableCell>
+                  <TableCell>Comments</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -92,10 +68,9 @@ const PastScheduleList = props => {
                     hover
                     key={order.id}
                   >
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.start}</TableCell>
-                    <TableCell>{order.end}</TableCell>
-                    <TableCell>{order.day}</TableCell>
+                    <TableCell>{order.date}</TableCell>
+                    <TableCell>{order.rating}/5</TableCell>
+                    <TableCell>{order.comments}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -108,8 +83,8 @@ const PastScheduleList = props => {
   );
 };
 
-PastScheduleList.propTypes = {
+ReviewList.propTypes = {
   className: PropTypes.string
 };
 
-export default PastScheduleList;
+export default ReviewList;

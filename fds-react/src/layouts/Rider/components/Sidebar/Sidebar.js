@@ -5,12 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 
 import { Profile, SidebarNav } from './components';
 
@@ -52,7 +47,12 @@ const Sidebar = props => {
       title: 'Schedule',
       href: '/rider_schedule',
       icon: <DateRangeIcon />
-    }
+    },
+    {
+      title: 'Reviews',
+      href: '/rider_review',
+      icon: <FeedbackIcon />
+    },
   ];
 
   return (
