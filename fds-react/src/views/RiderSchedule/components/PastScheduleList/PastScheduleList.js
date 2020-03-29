@@ -48,10 +48,12 @@ const statusColors = {
 
 const PastScheduleList = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [schedules] = useState(mockData);
 
-  const [orders] = useState(mockData);
+  /** REPLACE THE DATA COMING FROM BACKEND
+  const schedules = props.schedules;
+  **/
 
   return (
     <Card
@@ -87,15 +89,15 @@ const PastScheduleList = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {schedules.map(schedule => (
                   <TableRow
                     hover
                     key={order.id}
                   >
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.start}</TableCell>
-                    <TableCell>{order.end}</TableCell>
-                    <TableCell>{order.day}</TableCell>
+                    <TableCell>{schedule.ref}</TableCell>
+                    <TableCell>{schedule.start}</TableCell>
+                    <TableCell>{schedule.end}</TableCell>
+                    <TableCell>{schedule.day}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

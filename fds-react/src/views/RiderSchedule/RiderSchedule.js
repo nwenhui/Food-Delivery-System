@@ -20,8 +20,26 @@ const RiderSchedule = () => {
   const [selectedDate, handleDateChange] = useState(new Date());
   const [showData, setShowData] = useState(false);
 
-  const handleEnterBtton = () => {
+  const handleEnterButton = () => {
     console.log(moment(selectedDate).month());
+
+    /**** Upload the selected month to the backend ****
+
+    const month = moment(selectedDate).month();
+    const url = 'api/v1/...' + month;
+    let scheduleData;
+
+    fetch(url)
+    .then((response) => response.json())
+    .then((result) => {
+      scheduleData = JSON.parse(result);
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
+
     setShowData(true);
   }
 
@@ -48,12 +66,12 @@ const RiderSchedule = () => {
             color="primary"
             size="small"
             variant="contained"
-            onClick={handleEnterBtton}
+            onClick={handleEnterButton}
           >
             Enter
           </Button>
         </Grid>
-        { showData && 
+        { showData &&
           <Grid
             item
             lg={9}
@@ -62,6 +80,9 @@ const RiderSchedule = () => {
             xs={12}
           >
             <PastScheduleList />
+            /** REPLACE TO BELOW WHEN BACKEND IS CONNECTED **/
+            
+            /* <PastScheduleList schedules=scheduleData /> */
           </Grid>
         }
 
