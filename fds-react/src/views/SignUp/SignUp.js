@@ -19,8 +19,6 @@ const SignUp = (props) => {
   );
 
   function validateForm() {
-    // TODO:
-    // SQL query to check existence
     return username.length > 0 && password.length > 0;
   }
 
@@ -34,9 +32,28 @@ const SignUp = (props) => {
     console.log("username: " + username);
     console.log("password: " + password);
     console.log("usertype: " + usertype);
-    // TODO:
-    // send the above data to the backend as input for SQL insert query.
-    // via HTTP request
+
+    /**** Upload the new user data to the backend ****
+
+    const data = {username: username, password: password, usertype: usertype};
+    const url = 'api/v1/...';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then(() => {
+      console.log('Success!');
+    })
+    .catch((error) => {
+      // handle the error when the user already exists
+      console.log('Error: ', error);
+    });
+
+    ****/
 
     // return back to the home login page
     props.history.push("/");

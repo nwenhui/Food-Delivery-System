@@ -49,7 +49,7 @@ const Login = (props) => {
       console.log('Success!');
     })
     .catch((error) => {
-      // handle the error if user does not exist
+      // handle the failed authentication
       console.log('Error: ', error);
     });
 

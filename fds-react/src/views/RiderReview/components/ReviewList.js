@@ -14,6 +14,7 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
+import mockData from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -37,10 +38,24 @@ const useStyles = makeStyles(theme => ({
 
 const ReviewList = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [reviews] = useState(mockData);
 
-  const [orders] = useState(props.data);
+  /**** Fetch the reviews for the driver
+
+  let reviews;
+  const url = 'api/v1/...';
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    reviews = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -63,14 +78,14 @@ const ReviewList = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {reviews.map(review => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={review.id}
                   >
-                    <TableCell>{order.date}</TableCell>
-                    <TableCell>{order.rating}/5</TableCell>
-                    <TableCell>{order.comments}</TableCell>
+                    <TableCell>{review.date}</TableCell>
+                    <TableCell>{review.rating}/5</TableCell>
+                    <TableCell>{review.comments}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
