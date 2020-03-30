@@ -44,10 +44,24 @@ const useStyles = makeStyles(theme => ({
 
 const RestaurantReview = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [reviews] = useState(data.restaurantReview);
 
-  const [orders] = useState(data.restaurantReview);
+  /**** Fetch the restaurant reviews from backend ****
+
+  const url = 'api/v1/...';
+  let reviews;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    reviews = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -92,14 +106,14 @@ const RestaurantReview = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {reviews.map(review => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={review.id}
                   >
-                    <TableCell>{ order.name }</TableCell>
+                    <TableCell>{ review.name }</TableCell>
                     <TableCell>
-                      {order.feedbackList.map(feedback => (
+                      {review.feedbackList.map(feedback => (
                           <div style={{display:"flex", justifyContent:"space-between", width:"700px", borderBottom:"1px solid #ced3db" }} >
                             <div>{feedback.content}</div>
                             <div style={{}}>Rating: {feedback.rating}/5</div>

@@ -45,10 +45,13 @@ const useStyles = makeStyles(theme => ({
 
 const RestaurantFoodItem = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [items] = useState(data.restaurantFoodItem);
 
-  const [orders] = useState(data.restaurantFoodItem);
+  /**
+  const items = props.data; (passed down from CustomerSearch)
+  **/
+
   const tempSelectedItems = [];
 
   const handleAdd = (id) => {
@@ -58,7 +61,7 @@ const RestaurantFoodItem = props => {
         tempSelectedItems[i].count += 1;
         notAdded = false;
         break;
-      } 
+      }
     }
     if(notAdded) {
       tempSelectedItems.push({id: id, count: 1});
@@ -78,7 +81,28 @@ const RestaurantFoodItem = props => {
 
   // trigger
   const handleAddtoCart = () => {
+    /**** Upload the order data to the backend ****
+
+    const data = tempSelectedItems;
+    const url = 'api/v1/...';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then(() => {
+      console.log('Success!');
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
     console.log(tempSelectedItems)
+    alert("Order has been placed!")
   }
 
   const showNumber = (id) => {
@@ -114,28 +138,28 @@ const RestaurantFoodItem = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {items.map(item => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={item.id}
                   >
-                    <TableCell>{order.name}</TableCell>
-                    <TableCell>{order.amount}</TableCell>
-                    <TableCell>{order.discounted}</TableCell>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.amount}</TableCell>
+                    <TableCell>{item.discounted}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleRemove(order.oid)}><RemoveCircleIcon/></Button>
-                      {showNumber(order.oid)}
-                      <Button onClick={() => handleAdd(order.oid)}><AddCircleIcon/></Button>
+                      <Button onClick={() => handleRemove(item.oid)}><RemoveCircleIcon/></Button>
+                      {showNumber(item.oid)}
+                      <Button onClick={() => handleAdd(item.oid)}><AddCircleIcon/></Button>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            <Button 
+            <Button
               style={{float:"right", marginRight:"88px"}}
               onClick={handleAddtoCart}
-            > 
-              Add to Cart 
+            >
+              Add to Cart
             </Button>
           </div>
         </PerfectScrollbar>

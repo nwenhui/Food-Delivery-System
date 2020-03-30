@@ -44,10 +44,24 @@ const useStyles = makeStyles(theme => ({
 
 const RiderReview = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [reviews] = useState(data.riderReview);
 
-  const [orders] = useState(data.riderReview);
+  /**** Fetch the rider reviews from backend ****
+
+  const url = 'api/v1/...';
+  let reviews;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    reviews = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -93,14 +107,14 @@ const RiderReview = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {reviews.map(review => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={review.id}
                   >
-                    <TableCell>{ order.name }</TableCell>
+                    <TableCell>{ review.name }</TableCell>
                     <TableCell>
-                      {order.feedbackList.map(feedback => (
+                      {review.feedbackList.map(feedback => (
                           <div style={{display:"flex", justifyContent:"space-between", width:"700px", borderBottom:"1px solid #ced3db" }} >
                             <div>{feedback.content}</div>
                             <div style={{}}>Rating: {feedback.rating}/5</div>

@@ -39,11 +39,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// SQL: get reward points
+
 const RewardPoints = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const rewardPoints = 53;
+
+  /**** Fetch the reward points for the customer
+
+  const url = 'api/v1/...';
+  let rewardPoints = 0;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    rewardPoints = result;
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -64,7 +80,7 @@ const RewardPoints = props => {
             >
               REWARD POINTS
             </Typography>
-            <Typography variant="h3">53</Typography>
+            <Typography variant="h3">{rewardPoints}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

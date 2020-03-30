@@ -46,24 +46,94 @@ const CustomerSearch = () => {
     if(value != null) setSearch(value);
   };
 
-  // SQL: Pass search value to retrive restaurant food item
+  let restaurantFood;
+  let restaurantReview;
+  let foodInCategory;
+  let restaurantInCategory;
+
   const handleEnter = () => {
-      console.log(searchValue)
-      setShowRestaurantFoodItem(true);
-      setShowRestaurantList(false);
-      setShowFoodItemList(false);
+    // SQL: Pass search value to retrive restaurant food item & reviews
+
+    /**** Upload the searched name to the backend for food items ****
+
+    let restaurantName = searchValue;
+    const url = 'api/v1/...' + restaurantName;
+
+    fetch(url)
+    .then((response) => response.json())
+    .then((result) => {
+      restaurantFood = JSON.parse(result);
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
+
+    /**** Upload the searched name to the backend for reviews ****
+
+    let restaurantName = searchValue;
+    const url = 'api/v1/...' + restaurantName;
+
+    fetch(url)
+    .then((response) => response.json())
+    .then((result) => {
+      restaurantReview = JSON.parse(result);
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
+    console.log(searchValue)
+    setShowRestaurantFoodItem(true);
+    setShowRestaurantList(false);
+    setShowFoodItemList(false);
   }
 
-  // SQL: Pass selected value to retrive all food item of category
+
   const handleListFood = () => {
+    // SQL: Pass selected value to retrive all food item of category
+
+    /**** Upload the selected category to the backend ****
+
+    let category = selectedCategory;
+    const url = 'api/v1/...' + category;
+
+    fetch(url)
+    .then((response) => response.json())
+    .then((result) => {
+      foodInCategory = JSON.parse(result);
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
     console.log(selectedCategory)
     setShowRestaurantFoodItem(false);
     setShowRestaurantList(false);
     setShowFoodItemList(true);
   }
 
-  // SQL: Pass selected value to retrive all restaurant of category
   const handleListRestaurant = () => {
+    // SQL: Pass selected value to retrive all restaurant of category
+
+    /**** Upload the selected category to the backend ****
+
+    let category = selectedCategory;
+    const url = 'api/v1/...' + category;
+
+    fetch(url)
+    .then((response) => response.json())
+    .then((result) => {
+      restaurantInCategory = JSON.parse(result);
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
     console.log(selectedCategory)
     setShowRestaurantFoodItem(false);
     setShowRestaurantList(true);
@@ -101,13 +171,13 @@ const CustomerSearch = () => {
       </ToggleButtonGroup>
 
       <div className={classes.row} style={{marginBottom:"16px"}}>
-        { search ? 
+        { search ?
           <SearchInput
             className={classes.searchInput}
             placeholder="Search Item"
             onChange={handleSearchInput}
           /> :
-          <SelectCategory 
+          <SelectCategory
             value={selectedCategory}
             items={menuItems}
             onChange={handleSelectCategory}
@@ -118,9 +188,13 @@ const CustomerSearch = () => {
         {search ? "" : <Button variant="outlined" color="primary" onClick={handleListRestaurant}>Restaurant</Button> }
       </div>
       {showRestaurantList ? <RestaurantList /> : ""}
+      {/*showRestaurantList ? <RestaurantList data={restaurantInCategory}/> : ""*/}
       {showFoodItemList ? <FoodItem /> : ""}
+      {/*showFoodItemList ? <FoodItem data={foodInCategory}/> : ""*/}
       {showRestaurantFoodItem ? <RestaurantFoodItem restaurantname={searchValue} /> : ""}
+      {/*showRestaurantFoodItem ? <RestaurantFoodItem restaurantname={searchValue}, data={restaurantFood} /> : ""*/}
       {showRestaurantFoodItem ? <RestaurantReview /> : ""}
+      {/*showRestaurantFoodItem ? <RestaurantReview data={restaurantReview}/> : ""*/}
     </div>
   );
 };

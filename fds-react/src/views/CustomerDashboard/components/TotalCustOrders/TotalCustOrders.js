@@ -38,11 +38,28 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   }
 }));
-// SQL: Get Total number of Orders
+
+
 const TotalCustOrders = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const totalCustOrders = 20;
+
+  /**** Fetch the total number of orders for the customer
+
+  const url = 'api/v1/...';
+  let totalCustOrders = 0;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    totalCustOrders = result;
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <Card
@@ -63,7 +80,7 @@ const TotalCustOrders = props => {
             >
               TOTAL NUMBER OF ORDERS
             </Typography>
-            <Typography variant="h3">20</Typography>
+            <Typography variant="h3">{totalCustOrders}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

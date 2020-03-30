@@ -44,10 +44,12 @@ const useStyles = makeStyles(theme => ({
 
 const RestaurantReview = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [reviews] = useState(data.restaurantReview);
 
-  const [orders] = useState(data.restaurantReview);
+  /**
+  const reviews = props.data; (passed down from CustomerSearch)
+  **/
 
   return (
     <Card
@@ -95,16 +97,16 @@ const RestaurantReview = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {reviews.map(review => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={review.id}
                   >
                     <TableCell>
-                      {moment(order.createdAt).format('DD/MM/YYYY')}
+                      {moment(review.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
-                    <TableCell>{order.rating}</TableCell>
-                    <TableCell>{order.content}</TableCell>
+                    <TableCell>{review.rating}</TableCell>
+                    <TableCell>{review.content}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
