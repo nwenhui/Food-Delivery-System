@@ -48,13 +48,30 @@ const RestaurantFoodItem = props => {
   const classes = useStyles();
   const [items] = useState(data.restaurantFoodItem);
 
+  let init = Array(items.length).fill(0);
+  const [tempSelectedItems, setItems] = useState(init);
+
+  console.log(init);
+  console.log(tempSelectedItems);
+
   /**
   const items = props.data; (passed down from CustomerSearch)
   **/
 
-  const tempSelectedItems = [];
+  // const tempSelectedItems = [];
 
   const handleAdd = (id) => {
+    console.log(id);
+    let items = [...tempSelectedItems]
+    console.log(items);
+    let item = items[id]
+    console.log(item);
+
+    item += 1;
+    items[id] = item;
+
+    setItems(items);
+    /*
     let notAdded = true;
     for(let i = 0; i < tempSelectedItems.length; i++) {
       if (tempSelectedItems[i].id == id) {
@@ -67,9 +84,23 @@ const RestaurantFoodItem = props => {
       tempSelectedItems.push({id: id, count: 1});
     }
     console.log(tempSelectedItems)
+    */
   }
 
   const handleRemove = (id) => {
+    console.log(id);
+    let items = [...tempSelectedItems]
+    console.log(items);
+    let item = items[id]
+    console.log(item);
+
+    if (item > 0) {
+      item -= 1;
+    }
+    items[id] = item;
+
+    setItems(items);
+    /*
     for(let i = 0; i < tempSelectedItems.length; i++) {
       if (tempSelectedItems[i].id == id) {
         if(tempSelectedItems[i].count > 0) tempSelectedItems[i].count -= 1;
@@ -77,6 +108,7 @@ const RestaurantFoodItem = props => {
       }
     }
     console.log(tempSelectedItems)
+    */
   }
 
   // trigger
@@ -138,18 +170,18 @@ const RestaurantFoodItem = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {items.map(item => (
+                {items.map((item, i) => (
                   <TableRow
                     hover
-                    key={item.id}
+                    key={i}
                   >
                     <TableCell>{item.name}</TableCell>
                     <TableCell>{item.amount}</TableCell>
                     <TableCell>{item.discounted}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleRemove(item.oid)}><RemoveCircleIcon/></Button>
-                      {showNumber(item.oid)}
-                      <Button onClick={() => handleAdd(item.oid)}><AddCircleIcon/></Button>
+                      <Button onClick={() => handleRemove(i)}><RemoveCircleIcon/></Button>
+                      {tempSelectedItems[i]}
+                      <Button onClick={() => handleAdd(i)}><AddCircleIcon/></Button>
                     </TableCell>
                   </TableRow>
                 ))}
