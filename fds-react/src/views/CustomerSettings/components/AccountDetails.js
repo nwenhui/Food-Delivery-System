@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
 
 const AccountDetails = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -29,6 +28,43 @@ const AccountDetails = props => {
 
   const [creditcard, setCreditcard] = useState(["425543", "543321"]);
   const [location, setLocation] = useState(["Jurong Street 10"]);
+
+  /**** Fetch current user data from the backend ****
+  let data;
+
+  const url = 'api/v1/...';
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    data = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
+
+  /**** Upload modified user data to the backend ****
+
+  const url = 'api/v1/...';
+  
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then(() => {
+    console.log('Success!');
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   const handleChange = event => {
     setValues({
@@ -129,11 +165,11 @@ const AccountDetails = props => {
                       variant="outlined"
                     />
                   </div>
-                  
+
                 );
 
               })}
-             
+
               <Button onClick={handleAddCreditCard}>Add CreditCard</Button>
             </Grid>
             <Grid
@@ -157,7 +193,7 @@ const AccountDetails = props => {
                   </div>
                 );
               })}
-             
+
               <Button onClick={handleAddLocation}>Add Location</Button>
             </Grid>
           </Grid>

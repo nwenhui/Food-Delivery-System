@@ -40,10 +40,12 @@ const useStyles = makeStyles(theme => ({
 
 const FoodItem = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [items] = useState(props.data);
 
-  const [orders] = useState(props.data);
+  /*
+  const items = props.data;
+  */
 
   return (
     <Card
@@ -67,15 +69,15 @@ const FoodItem = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {items.map(item => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={item.id}
                   >
-                    <TableCell>{order.oid}</TableCell>
-                    <TableCell>{order.name}</TableCell>
-                    <TableCell>{order.amount}</TableCell>
-                    <TableCell>{order.discounted}</TableCell>
+                    <TableCell>{item.oid}</TableCell>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.amount}</TableCell>
+                    <TableCell>{item.discounted}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

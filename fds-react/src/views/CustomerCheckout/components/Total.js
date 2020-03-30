@@ -42,8 +42,11 @@ const useStyles = makeStyles(theme => ({
 
 const Total = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+
+  /*
+  const totalValue = props.data;
+  */
 
   return (
     <Card
@@ -65,6 +68,7 @@ const Total = props => {
               Total Amount
             </Typography>
                 <Typography variant="h3">{data.totalValue}</Typography>
+                {/* <Typography variant="h3">{totalValue}</Typography> */}
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

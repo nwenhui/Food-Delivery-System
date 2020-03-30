@@ -22,19 +22,64 @@ const useStyles = makeStyles(theme => ({
 
 const CustomerCheckout = () => {
 	const classes = useStyles();
-	
 	const [value, setValue] = React.useState('cash');
 
 	const handleChange = event => {
     setValue(event.target.value);
   };
-  
+
   const handleCheckout = () => {
-    if(value === "cash") console.log(true)
-    else console.log(false)
+    let payByCash = true;
+
+    if(value === "cash") {
+      console.log(payByCash);
+    } else {
+      payByCash = false;
+      console.log(payByCash);
+    }
+
+    /**** Upload the order to the backend ****
+     **** (let backend to generate an orderID) ****
+
+    const data = {payment: payByCash};
+    const url = 'api/v1/...';
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then(() => {
+      console.log('Success!');
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
   }
 
+
   // SQL: pass table data from here because need oid for checkout
+
+  /**** Fetch the orderd food list from the backend
+
+  let checkoutList;
+  const url = 'api/v1/...';
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    checkoutList = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <div className={classes.root}>
@@ -51,6 +96,7 @@ const CustomerCheckout = () => {
           xs={12}
         >
           <FoodItem data={data.foodItem}/>
+          {/*<FoodItem data={checkoutList.foodItem} />*/}
         </Grid>
         <Grid
           item
@@ -60,6 +106,7 @@ const CustomerCheckout = () => {
           xs={12}
         >
           <Total />
+          {/*<Total data={checkoutList.totalValue} />*/}
         </Grid>
         <Grid>
 					<FormControl component="fieldset">
@@ -71,7 +118,7 @@ const CustomerCheckout = () => {
 					</FormControl>
 					<Button style={{marginTop:"75px"}} color="primary" variant="contained" onClick={handleCheckout}>Check Out</Button>
         </Grid>
-        
+
       </Grid>
     </div>
   );
