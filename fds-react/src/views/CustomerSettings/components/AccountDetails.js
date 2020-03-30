@@ -74,7 +74,7 @@ const AccountDetails = props => {
   };
 
   const handleAddCreditCard = () => {
-    setCreditcard(creditcard.concat("Add Credit Card"));
+    setCreditcard(creditcard.concat(""));
   }
 
   const handleCreditCardChange = (event, index) => {
@@ -89,12 +89,17 @@ const AccountDetails = props => {
   }
 
   const handleAddLocation = () => {
-    setLocation(location.concat("Add Location"));
+    setLocation(location.concat(""));
   }
 
   const handleLocationChange = (event, index) => {
-    location[index] = event.target.value;
-    setLocation(location)
+    console.log("The index is: " + index)
+    let locs = [...location];
+    let loc = [...location[index]];
+    loc = event.target.value;
+    locs[index] = loc;
+    console.log("Locations are: " + locs);
+    setLocation(locs)
   }
 
   return (
@@ -188,8 +193,7 @@ const AccountDetails = props => {
                     label="Location"
                     margin="dense"
                     name="location"
-                    onChange={handleLocationChange}
-                    required
+                    onChange={(e) => handleLocationChange(e, index)}
                     value={value}
                     variant="outlined"
                   />
