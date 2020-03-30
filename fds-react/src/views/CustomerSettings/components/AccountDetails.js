@@ -48,7 +48,7 @@ const AccountDetails = props => {
   /**** Upload modified user data to the backend ****
 
   const url = 'api/v1/...';
-  
+
   fetch(url, {
     method: 'POST',
     headers: {
@@ -78,11 +78,14 @@ const AccountDetails = props => {
   }
 
   const handleCreditCardChange = (event, index) => {
-    creditcard[index] = event.target.value;
-    console.log(creditcard)
-    setCreditcard(creditcard)
+    console.log("The index is: " + index)
+    let cards = [...creditcard];
+    let card = [...cards[index]];
+    card = event.target.value;
+    cards[index] = card;
+    console.log("Cards are: " + cards);
+    setCreditcard(cards);
     console.log(typeof event.target.value)
-    console.log(index)
   }
 
   const handleAddLocation = () => {
