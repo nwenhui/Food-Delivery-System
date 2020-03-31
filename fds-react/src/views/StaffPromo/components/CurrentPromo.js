@@ -43,23 +43,85 @@ const Cpromo = props => {
 
   const classes = useStyles();
 
-  const [orders] = useState(props.data);
+  const [promos, setPromos] = useState(props.data);
   const [openEdit, setOpenEdit] = useState(false);
   const [editData, setEditData] = useState("");
+  const [editIndex, setIndex] = useState(0);
 
-  const handleClick = (orders) => {
-    setEditData(orders)
+  const handleClick = (id, order) => {
+    setEditData(order)
+    console.log("order: " + order)
+    setIndex(id)
+    console.log("index: " + id)
     setOpenEdit(true)
   }
 
-  const handleEdit = () => {
+  function handleEdit(id, discount, minAmt, startDate, endDate) {
+    let promoData = [...promos];
+    let promo = promoData[editIndex];
+
+    promo.discount = discount;
+    promo.minAmount = minAmt;
+    promo.startDate = startDate;
+    promo.endDate = endDate;
+    promoData[editIndex] = promo;
+
+    setPromos(promoData);
     setOpenEdit(!openEdit);
+
+    let data = {
+      id: id,
+      discount: discount,
+      minAmount: minAmt,
+      startDate: startDate,
+      endDate: endDate
+    };
+
+    /**** Update modified promotion data to the backend ****
+
+    const url = 'api/v1/...';
+
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then(() => {
+      console.log('Success!');
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
   }
 
   // QUERY: DELETE
-  const handleDelete = (fid) => {
-    console.log(fid)
+  const handleDelete = (index, id) => {
+    let promoData = [...promos];
+    let promo = promoData[index];
+    promoData.splice(index, 1); // remove the element
+    setPromos(promoData);
+
+    /**** Delete the promotion from the backend ****
+
+    const url = 'api/v1/...' + '/' + id;
+
+    fetch(url, {
+      method: 'DELETE'
+    })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
   }
+
+
   return (
     <Card
       {...rest}
@@ -85,18 +147,18 @@ const Cpromo = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {promos.map((promo, index) => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={index}
                   >
-                    <TableCell>{order.promo_id}</TableCell>
-                    <TableCell>{order.discount}</TableCell>
-                    <TableCell>{order.minAmount}</TableCell>
-                    <TableCell>{order.startDate}</TableCell>
-                    <TableCell>{order.endDate}</TableCell>
-                    <TableCell><EditIcon onClick={() => handleClick(order)}/></TableCell>
-                    <TableCell><DeleteIcon onClick={() => handleDelete(order.promo_id)}/></TableCell>
+                    <TableCell>{promo.promo_id}</TableCell>
+                    <TableCell>{promo.discount}</TableCell>
+                    <TableCell>{promo.minAmount}</TableCell>
+                    <TableCell>{promo.startDate}</TableCell>
+                    <TableCell>{promo.endDate}</TableCell>
+                    <TableCell><EditIcon onClick={() => handleClick(index, promo)}/></TableCell>
+                    <TableCell><DeleteIcon onClick={() => handleDelete(index, promo.promo_id)}/></TableCell>
                   </TableRow>
                 ))}
               </TableBody>

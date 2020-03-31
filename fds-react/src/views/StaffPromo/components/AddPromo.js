@@ -55,11 +55,12 @@ const AddPromo = props => {
 		console.log(minAmt)
 		console.log(startDate)
 		console.log(endDate)
+    props.parentSubmit(discount, minAmt, startDate, endDate);
     props.onClick();
   }
 
   return (
-    <div 
+    <div
       style={{
         borderStyle: "solid",
         border: "1px solid black",
@@ -72,7 +73,7 @@ const AddPromo = props => {
         width: "300px"
       }}
     >
-      
+
       <FormControl>
 				<InputLabel htmlFor="my-input">Discount</InputLabel>
 				<Input id="my-input" aria-describedby="my-helper-text" onChange={handleDiscount}/>

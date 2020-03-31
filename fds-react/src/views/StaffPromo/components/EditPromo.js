@@ -30,6 +30,7 @@ const EditPromo = props => {
 
   const classes = useStyles();
 
+  const [id, setId] = useState(data.promo_id);
   const [discount, setDiscount] = useState(data.discount);
   const [minAmt, setMinAmt] = useState(data.minAmount);
   const [startDate, setStartDate] = useState(data.startDate);
@@ -57,11 +58,11 @@ const EditPromo = props => {
 		console.log(minAmt)
 		console.log(startDate)
 		console.log(endDate)
-    props.onClick();
+    props.onClick(id, discount, minAmt, startDate, endDate);
   }
 
   return (
-    <div 
+    <div
       style={{
         borderStyle: "solid",
         border: "1px solid black",
@@ -74,8 +75,8 @@ const EditPromo = props => {
         width: "300px"
       }}
     >
-			<div style={{marginBottom:"5px"}}>Edit Promotion: {props.data.promo_id}</div>
-      
+			<div style={{marginBottom:"5px"}}>Edit Promotion: {id}</div>
+
       <FormControl>
 				<InputLabel htmlFor="my-input">Discount</InputLabel>
 				<Input aria-describedby="my-helper-text" onChange={handleDiscount} defaultValue={discount}/>
@@ -90,7 +91,7 @@ const EditPromo = props => {
         <TextField
           label="Start Date"
           type="datetime-local"
-          defaultValue={moment(startDate)}
+          defaultValue={moment(startDate).format('L')}
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -102,7 +103,7 @@ const EditPromo = props => {
         <TextField
           label="End Date"
           type="datetime-local"
-          defaultValue={moment(endDate)}
+          defaultValue={moment(endDate).format('L')}
           className={classes.textField}
           InputLabelProps={{
             shrink: true,

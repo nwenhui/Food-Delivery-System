@@ -25,8 +25,72 @@ const StaffPromo = () => {
     setOpenDiv(!openDiv);
   }
 
-  // List all promotion
-  // QUERY: fis, name, original, discounted, dailyLimit, categories[]
+	/**** Fetch promotion data from the backend ****
+
+	const url = 'api/v1/...';
+	let promoData;
+
+	fetch(url)
+	.then((response) => response.json())
+	.then((result) => {
+		promoData = JSON.parse(result);
+	})
+	.catch((error) => {
+		console.log('Error: ', error);
+	});
+
+	****/
+
+	/*
+	const [promos, setPromo] = useState(promoData);
+	*/
+
+	function handleSubmit(disc, min, start, end) {
+		let data = {
+			discount: disc,
+			minAmt: min,
+			startDate: start,
+			endDate: end
+		};
+
+		console.log("input: " + data);
+
+		/****
+		// Send data to the backend
+		const url = 'api/v1/...';
+
+	  fetch(url, {
+	    method: 'POST',
+	    headers: {
+	      'Content-Type': 'application/json',
+	    },
+	    body: JSON.stringify(data),
+	  })
+	  .then((response) => response.json())
+	  .then(() => {
+	    console.log('Success!');
+	  })
+	  .catch((error) => {
+	    console.log('Error: ', error);
+	  });
+
+		// Fetch the latest promo data from backend
+		const url = 'api/v1/...';
+		let promoData;
+
+		fetch(url)
+		.then((response) => response.json())
+		.then((result) => {
+			promoData = JSON.parse(result);
+		})
+		.catch((error) => {
+			console.log('Error: ', error);
+		});
+
+		setPromo(promoData);
+
+		****/
+	}
 
   return (
     <div className={classes.root}>
@@ -52,7 +116,7 @@ const StaffPromo = () => {
 					>
 						Add Promotion
 					</Button>
-          {openDiv && <AddPromo onClick={handleOpenDiv}/> }
+          {openDiv && <AddPromo parentSubmit={handleSubmit} onClick={handleOpenDiv}/> }
 				</Grid>
         <Grid
           item
@@ -62,6 +126,7 @@ const StaffPromo = () => {
           xs={12}
         >
           <CurrentPromo data={data} />
+					{/* <CurrentPromo data={promos} /> */}
         </Grid>
 			</Grid>
     </div>
