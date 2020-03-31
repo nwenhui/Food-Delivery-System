@@ -38,11 +38,12 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   }
 }));
-// SQL: Get Total number of Orders
+
+
 const TopFive = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const topFive = props.data;
 
   return (
     <Card
@@ -64,11 +65,11 @@ const TopFive = props => {
               TOP FIVE
             </Typography>
             {
-                props.data.map(item => {
+                topFive.map(item => {
                     return <Typography variant="h3">{item}</Typography>
                 })
             }
-            
+
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

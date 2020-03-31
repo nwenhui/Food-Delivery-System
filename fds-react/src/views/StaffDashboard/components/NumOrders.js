@@ -38,11 +38,12 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   }
 }));
-// SQL: Get Total number of Orders
+
+
 const NumOrders = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const numOrders = props.data;
 
   return (
     <Card
@@ -63,7 +64,7 @@ const NumOrders = props => {
             >
               TOTAL NUMBER OF ORDERS
             </Typography>
-            <Typography variant="h3">{props.data}</Typography>
+            <Typography variant="h3">{numOrders}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

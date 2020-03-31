@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { FormControl, InputLabel, Input, MenuItem, Select, TextField, Button } from '@material-ui/core';
 import moment from 'moment';
@@ -30,12 +31,29 @@ const StaffDashboard = () => {
     setSelectedDate(e);
   }
 
-  const handleEnterBtton = () => {
+  const handleEnterButton = () => {
     console.log(moment(selectedDate).month())
+
+    /**** Upload the selected month to the backend ****
+
+    const month = moment(selectedDate).month();
+    const url = 'api/v1/...' + month;
+    let summary;
+
+    fetch(url)
+    .then((response) => response.json())
+    .then((result) => {
+      summary = JSON.parse(result);
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+
+    ****/
+
     setShowData(true);
   }
 
-  // QUERY: month => AvgOrders, NumOrders, TotalProfit, TopFive[]
 
   return (
     <div className={classes.root}>
@@ -52,26 +70,18 @@ const StaffDashboard = () => {
             xl={12}
             xs={12}
           >
-          <FormControl>
-          <TextField
-            label="Select Month"
-            type="date"
-            defaultValue="2017-05-24"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleDateChange}
-          />
-          </FormControl>
-          <Button
-            color="primary"
-            size="small"
-            variant="contained"
-            onClick={handleEnterBtton}
-          >
-            Enter
-          </Button>
+            <text style={{marginRight:"8px"}}>Select Month:</text>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker value={selectedDate} onChange={handleDateChange} />
+            </MuiPickersUtilsProvider>
+            <Button
+              color="primary"
+              size="small"
+              variant="contained"
+              onClick={handleEnterButton}
+            >
+              Enter
+            </Button>
           </Grid>
           { showData &&
             <Grid
@@ -82,9 +92,10 @@ const StaffDashboard = () => {
               xs={12}
             >
               <AvgOrders data={32}/>
+              {/* <AvgOrders data={summary.avgOrders}/> */}
             </Grid>
           }
-          { showData && 
+          { showData &&
             <Grid
               item
               lg={4}
@@ -93,9 +104,10 @@ const StaffDashboard = () => {
               xs={12}
             >
               <NumOrders data={20} />
+              {/* <NumOrders data={summary.numOrders} /> */}
             </Grid>
           }
-          { showData && 
+          { showData &&
             <Grid
               item
               lg={4}
@@ -104,9 +116,10 @@ const StaffDashboard = () => {
               xs={12}
             >
               <TotalProfit data={20} />
+              {/* <TotalProfit data={summary.totalProfit} /> */}
             </Grid>
           }
-          { showData && 
+          { showData &&
             <Grid
               item
               lg={4}
@@ -115,6 +128,7 @@ const StaffDashboard = () => {
               xs={12}
             >
               <TopFive data={["Chicken Rice", "Pudding", "Apple", "Pear", "Watermelon"]} />
+              {/* <TopFive data={summary.topFive} /> */}
             </Grid>
           }
 
