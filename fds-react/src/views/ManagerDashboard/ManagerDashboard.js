@@ -35,6 +35,75 @@ const ManagerDashboard = () => {
   const [showDelvery, setShowDelivery] = useState(false);
   const [showSales, setShowSales] = useState(false);
 
+  let salesSummary;
+  let custSummary;
+  let deliverySummary;
+  let riderSummary;
+
+  /**** Fetch the sales summary from the backend ****
+
+  let month = moment(selectedDate).month();
+  const url = 'api/v1/...' + month;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    salesSummary = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
+
+  /**** Fetch the customer summary from the backend ****
+
+  let month = moment(selectedDate).month();
+  const url = 'api/v1/...' + month;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    custSummary = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
+
+  /**** Fetch the delivery summary from the backend ****
+
+  let month = moment(selectedDate).month();
+  const url = 'api/v1/...' + month;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    deliverySummary = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
+
+  /**** Fetch the rider summary from the backend ****
+
+  let month = moment(selectedDate).month();
+  const url = 'api/v1/...' + month;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    riderSummary = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
+
 
   const handleSelectChange = (e) => {
     setSelectedCategory(e.target.value)
@@ -140,7 +209,7 @@ const ManagerDashboard = () => {
               Enter
             </Button>
           </Grid>
-          { showSales && 
+          { showSales &&
             <Grid
               item
               lg={4}
@@ -149,9 +218,10 @@ const ManagerDashboard = () => {
               xs={12}
             >
               <TotalNew data={20} />
+              {/* <TotalNew data={salesSummary.totalNew} /> */}
             </Grid>
           }
-          { showSales && 
+          { showSales &&
             <Grid
               item
               lg={4}
@@ -160,9 +230,10 @@ const ManagerDashboard = () => {
               xs={12}
             >
               <TotalOrders data={20} />
+              {/* <TotalOrders data={salesSummary.totalOrders} /> */}
             </Grid>
           }
-          { showSales && 
+          { showSales &&
             <Grid
               item
               lg={4}
@@ -171,9 +242,10 @@ const ManagerDashboard = () => {
               xs={12}
             >
               <TotalProfit data={20} />
+              {/* <TotalProfit data={salesSummary.totalProfit} /> */}
             </Grid>
           }
-          { showCustomer && 
+          { showCustomer &&
             <Grid
               item
               lg={12}
@@ -182,9 +254,10 @@ const ManagerDashboard = () => {
               xs={12}
             >
               <IndividualData data={123}/>
+              {/* <IndividualData data={custSummary}/> */}
             </Grid>
           }
-          { showDelvery && 
+          { showDelvery &&
             <Grid
               item
               lg={12}
@@ -193,9 +266,10 @@ const ManagerDashboard = () => {
               xs={12}
             >
               <DeliveryData data={123} />
+              {/* <DeliveryData data={deliverySummary} /> */}
             </Grid>
           }
-          { showRider && 
+          { showRider &&
             <Grid
               item
               lg={12}
@@ -204,6 +278,7 @@ const ManagerDashboard = () => {
               xs={12}
             >
               <RiderData data={123} />
+              {/* <RiderData data={riderSummary} /> */}
             </Grid>
           }
         </Grid>

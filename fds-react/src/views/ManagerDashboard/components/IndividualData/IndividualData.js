@@ -39,10 +39,12 @@ const useStyles = makeStyles(theme => ({
 
 const IndividualData = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+  const [customers] = useState(mockData);
 
-  const [orders] = useState(mockData); //useState(props.data)
+  /*
+  const customers = props.data;
+  */
 
   return (
     <Card
@@ -66,15 +68,15 @@ const IndividualData = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                {customers.map(customer => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={customer.id}
                   >
-                    <TableCell>{order.custid}</TableCell>
-                    <TableCell>{order.name}</TableCell>
-                    <TableCell>{order.numOrders}</TableCell>
-                    <TableCell>{order.profit}</TableCell>
+                    <TableCell>{customer.custid}</TableCell>
+                    <TableCell>{customer.name}</TableCell>
+                    <TableCell>{customer.numOrders}</TableCell>
+                    <TableCell>{customer.profit}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
