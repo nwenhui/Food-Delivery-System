@@ -60,6 +60,7 @@ const Profile = props => {
         className={classes.avatar}
         component={RouterLink}
         src={user.avatar}
+        to="/rider_dashboard"
       />
       <Typography
         className={classes.name}

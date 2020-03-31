@@ -13,8 +13,8 @@ const useStyles = makeStyles(theme => ({
     minHeight: 'fit-content'
   },
   avatar: {
-    width: 60,
-    height: 60
+    width: 100,
+    height: 100
   },
   name: {
     marginTop: theme.spacing(1)
@@ -60,7 +60,7 @@ const Profile = props => {
         className={classes.avatar}
         component={RouterLink}
         src={user.avatar}
-        to="/settings"
+        to="/staff_dashboard"
       />
       <Typography
         className={classes.name}
