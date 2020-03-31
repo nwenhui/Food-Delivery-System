@@ -19,8 +19,21 @@ const useStyles = makeStyles(theme => ({
 const StaffReview = () => {
   const classes = useStyles();
 
-  // QUERY: Restaurant Reviews
-  // QUERY: return date, rating, comments
+  /**** Fetch the restaurantreview data from backend ****
+
+  const url = 'api/v1/...';
+  let reviews;
+
+  fetch(url)
+  .then((response) => response.json())
+  .then((result) => {
+    reviews = JSON.parse(result);
+  })
+  .catch((error) => {
+    console.log('Error: ', error);
+  });
+
+  ****/
 
   return (
     <div className={classes.root}>
@@ -38,6 +51,7 @@ const StaffReview = () => {
             xs={12}
         >
             <RestaurantReview data={data} />
+            {/* <RestaurantReview data={reviews} /> */}
         </Grid>
         </Grid>
     </div>
